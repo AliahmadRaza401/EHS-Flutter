@@ -40,7 +40,7 @@ class _HomeState extends State<Home> {
           borderRadius: BorderRadius.circular(14.0),
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Color(0xffbad6f7), width: 2.0),
+          borderSide: BorderSide(color: Color(0xff8cbaf2), width: 2.0),
           borderRadius: BorderRadius.circular(14.0),
         ),
         border: InputBorder.none,

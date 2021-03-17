@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:ehs/Category/categorypage.dart';
+import 'package:ehs/animations/slideanimation.dart';
 import 'package:flutter/material.dart';
 
 class CourseCategory extends StatefulWidget {
@@ -14,8 +15,8 @@ class _CourseCategoryState extends State<CourseCategory> {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (BuildContext context) => CategoryPage(
+          SlideBottomRoute(
+            page: CategoryPage(
               name: title,
               image: image,
             ),
@@ -87,18 +88,18 @@ class _CourseCategoryState extends State<CourseCategory> {
             courseCard('Arts', 'assets/arts.jpg'),
             courseCard('Business Studies', 'assets/business.jpg'),
             courseCard('World Studies', 'assets/world_study.jpg'),
-            courseCard('Classical Studies', 'assets/sliderimage.jpg'),
+            courseCard('Classical Studies', 'assets/classical_study.jpg'),
             courseCard('Computer Studies', 'assets/computer_study.jpg'),
             courseCard('Cooperative Education', 'assets/cooperative_study.jpg'),
             courseCard('English', 'assets/english.jpg'),
             courseCard('English as a Second Language', 'assets/english.jpg'),
-            courseCard('Native Studies', 'assets/sliderimage.jpg'),
-            courseCard('French Courses', 'assets/sliderimage.jpg'),
+            courseCard('Native Studies', 'assets/native_studies.jpg'),
+            courseCard('French Courses', 'assets/french_courses.jpg'),
             courseCard('Career Education', 'assets/career_education.jpg'),
             courseCard('Health Education', 'assets/health_education.jpg'),
-            courseCard('Interdisciplinary Studies', 'assets/sliderimage.jpg'),
+            courseCard('Interdisciplinary Studies', 'assets/interdisciplinary_studies .jpg'),
             courseCard('Mathematics', 'assets/math.png'),
-            courseCard('Native Languages', 'assets/sliderimage.jpg'),
+            courseCard('Native Languages', 'assets/native_languages.jpg'),
             courseCard('Science', 'assets/science.jpg'),
             courseCard('Social Science & Humanities', 'assets/social_science.jpg'),
             courseCard('Technological Education', 'assets/technological_education.jpg'),

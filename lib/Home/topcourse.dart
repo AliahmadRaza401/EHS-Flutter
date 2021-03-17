@@ -1,9 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:ehs/Course/course.dart';
+import 'package:ehs/animations/scaleanimation.dart';
 import 'package:flutter/material.dart';
 
 class TopCourses extends StatefulWidget {
-
   String title;
   String image;
 
@@ -14,7 +14,6 @@ class TopCourses extends StatefulWidget {
 }
 
 class _TopCoursesState extends State<TopCourses> {
-
   // responsive width
   dynamic width() {
     if (MediaQuery.of(context).orientation == Orientation.portrait) {
@@ -30,8 +29,8 @@ class _TopCoursesState extends State<TopCourses> {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (BuildContext context) => CoursePage(
+          ScaleRoute(
+            page: CoursePage(
               courseName: '${widget.title}',
               courseImage: '${widget.image}',
             ),
@@ -39,7 +38,6 @@ class _TopCoursesState extends State<TopCourses> {
         );
       },
       child: Container(
-        padding: EdgeInsets.all(10.0),
         width: width(),
         height: 120,
         decoration: BoxDecoration(
@@ -72,7 +70,6 @@ class _TopCoursesState extends State<TopCourses> {
       ),
     );
   }
-
 
   @override
   Widget build(BuildContext context) {

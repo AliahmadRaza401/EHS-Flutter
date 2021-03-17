@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:ehs/Course/course.dart';
+import 'package:ehs/animations/scaleanimation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -90,8 +91,8 @@ class _CategoryPageState extends State<CategoryPage> {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (BuildContext context) => CoursePage(
+          ScaleRoute(
+            page: CoursePage(
               courseName: cardTitle,
               courseImage: cardImage,
             ),

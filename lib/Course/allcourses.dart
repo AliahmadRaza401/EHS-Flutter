@@ -1,4 +1,5 @@
 import 'package:ehs/Course/course.dart';
+import 'package:ehs/animations/scaleanimation.dart';
 import 'package:flutter/material.dart';
 
 class AllCourses extends StatefulWidget {
@@ -14,8 +15,8 @@ class _AllCoursesState extends State<AllCourses> {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (BuildContext context) => CoursePage(
+          ScaleRoute(
+            page: CoursePage(
               courseName: cardTitle,
               courseImage: cardImage,
             ),
