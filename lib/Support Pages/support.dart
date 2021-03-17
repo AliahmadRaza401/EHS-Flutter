@@ -8,6 +8,28 @@ class Support extends StatefulWidget {
 }
 
 class _SupportState extends State<Support> {
+  // header image widget
+  Widget headerImage() {
+    return Container(
+      width: MediaQuery.of(context).size.width * 1,
+      height: MediaQuery.of(context).size.height * .3,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage(
+            'assets/support.png',
+          ),
+          fit: BoxFit.fill,
+        ),
+        color: Color(0xff3385e8),
+        borderRadius: BorderRadius.only(
+          bottomRight: Radius.circular(30),
+          bottomLeft: Radius.circular(30),
+        ),
+      ),
+      child: null,
+    );
+  }
+
   //card
   Widget supportCards() {
     return Container(
@@ -31,11 +53,17 @@ class _SupportState extends State<Support> {
                     padding: EdgeInsets.all(2.0),
                     child: ListTile(
                       leading: Icon(
-                        Icons.chat_bubble_outline_rounded,
+                        Icons.chat_outlined,
                         color: Color(0xff3385e8),
                         size: 44.0,
                       ),
-                      title: Text("Contact Live Chat"),
+                      title: Text(
+                        "Contact Live Chat",
+                        style: TextStyle(
+                          color: Color(0xff3385e8),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                       trailing: Icon(
                         Icons.navigate_next_rounded,
                         color: Color(0xff3385e8),
@@ -58,13 +86,18 @@ class _SupportState extends State<Support> {
                     child: ListTile(
                       leading: Icon(
                         Icons.call_rounded,
-                        color: Color(0xff3385e8),
+                        color: Colors.black54,
                         size: 44.0,
                       ),
-                      title: Text("Contact Live Call"),
+                      title: Text(
+                        "Contact Live Call",
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
                       trailing: Icon(
                         Icons.navigate_next_rounded,
-                        color: Color(0xff3385e8),
+                        color: Colors.black54,
                         size: 44.0,
                       ),
                     ),
@@ -83,103 +116,86 @@ class _SupportState extends State<Support> {
     return Scaffold(
       backgroundColor: Color(0xfff2f3f5),
       appBar: AppBar(
-        title: Text(
-          "Reach The Support Team",
+        title: AutoSizeText(
+          'Reach Our Support Team',
           style: TextStyle(
-            color: Color(0xff3385e8),
+            color: Colors.black,
             fontSize: 22.0,
+            fontWeight: FontWeight.bold,
           ),
         ),
-        automaticallyImplyLeading: false,
         centerTitle: true,
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
+        backgroundColor: Color(0xfff2f3f5),
+        elevation: 2.0,
       ),
-      body: Container(
-        padding: EdgeInsets.only(
-          bottom: 20.0,
-        ),
-        height: MediaQuery.of(context).size.height * 1,
-        decoration: BoxDecoration(
-          color: Color(0xfff2f3f5),
-        ),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * .1),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.support_agent_rounded,
-                      color: Color(0xff3385e8),
-                      size: 110.0,
-                    ),
-                  ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            headerImage(),
+            Padding(
+              padding: const EdgeInsets.only(
+                top: 20.0,
+              ),
+              child: Text(
+                "How Can We Help You?",
+                style: TextStyle(
+                  color: Color(0xff3385e8),
+                  fontSize: 22.0,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(
-                  top: 10.0,
+            ),
+            supportCards(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 54.0,
+                  height: 54.0,
+                  decoration: BoxDecoration(
+                    // color: Color(0xff3385e8),
+                    borderRadius: BorderRadius.circular(50.0),
+                    // border: Border.all(
+                    //   color: Color(0xff3385e8),
+                    //   width: 2.0,
+                    // ),
+                  ),
+                  child: Icon(
+                    Icons.email_outlined,
+                    size: 34.0,
+                    color: Color(0xff3385e8),
+                  ),
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    AutoSizeText(
-                      "How can we help you?",
-                      style: TextStyle(
-                        fontSize: 22.0,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              supportCards(),
-              Row(
+              ],
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 6.0),
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    width: 80.0,
-                    height: 80.0,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(50.0),
-                    ),
-                    child: Icon(
-                      Icons.email_outlined,
-                      size: 46.0,
+                  Text("Send us an email:"),
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                top: 6.0,
+                bottom: 30.0,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "info@elitehighschool.com",
+                    style: TextStyle(
                       color: Color(0xff3385e8),
+                      fontSize: 18.0,
                     ),
                   ),
                 ],
               ),
-              Padding(
-                padding: EdgeInsets.only(top: 20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text("Send us an email:"),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 10.0, bottom: 10.0,),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "info@ehs.ca",
-                      style: TextStyle(
-                        fontSize: 22.0,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

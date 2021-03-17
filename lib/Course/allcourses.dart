@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:ehs/Course/course.dart';
 import 'package:ehs/animations/scaleanimation.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,76 @@ class AllCourses extends StatefulWidget {
 }
 
 class _AllCoursesState extends State<AllCourses> {
+  //responsive height
+  dynamic height() {
+    if (MediaQuery.of(context).orientation == Orientation.portrait) {
+      return MediaQuery.of(context).size.height * .34;
+    } else {
+      return MediaQuery.of(context).size.height * .66;
+    }
+  }
+
+  //responsive body height
+  dynamic bodyHeight() {
+    if (MediaQuery.of(context).orientation == Orientation.portrait) {
+      return MediaQuery.of(context).size.height * .27;
+    } else {
+      return MediaQuery.of(context).size.height * .5;
+    }
+  }
+
+  //responsive body container height
+  dynamic bodyContainerHeight() {
+    if (MediaQuery.of(context).orientation == Orientation.portrait) {
+      return MediaQuery.of(context).size.height * .72;
+    } else {
+      return MediaQuery.of(context).size.height * .9;
+    }
+  }
+
+  //category image
+  Widget categoryImage() {
+    return Stack(
+      children: [
+        Container(
+          padding: EdgeInsets.all(10.0),
+          width: MediaQuery.of(context).size.width,
+          height: height(),
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/sliderimage.jpg'),
+              fit: BoxFit.fill,
+            ),
+          ),
+        ),
+        Container(
+          height: 80,
+          child: AppBar(
+            title: AutoSizeText(
+              'All Courses',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 22.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            iconTheme: IconThemeData(
+              color: Colors.white,
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+                bottom: Radius.circular(24),
+              ),
+            ),
+            centerTitle: true,
+            backgroundColor: Color(0xfff2f3f5).withOpacity(.3),
+            elevation: 2.0,
+          ),
+        ),
+      ],
+    );
+  }
+
   //course card
   Widget allCourseCard(
       String cardTitle, String cardSubTitle, String cardImage) {
@@ -27,7 +98,7 @@ class _AllCoursesState extends State<AllCourses> {
         height: 100.0,
         padding: EdgeInsets.all(10.0),
         child: Card(
-          elevation: 5,
+          elevation: 4,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12.0),
           ),
@@ -57,7 +128,7 @@ class _AllCoursesState extends State<AllCourses> {
     return Align(
       alignment: Alignment.center,
       child: Container(
-        width: MediaQuery.of(context).size.width * .94,
+        width: MediaQuery.of(context).size.width * .9,
         child: ListView(
           children: <Widget>[
             allCourseCard(
@@ -108,29 +179,38 @@ class _AllCoursesState extends State<AllCourses> {
     );
   }
 
+  //courses list
+  Widget courseList() {
+    return Container(
+      margin: EdgeInsets.only(top: bodyHeight()),
+      padding: EdgeInsets.only(
+        top: 10.0,
+      ),
+      width: MediaQuery.of(context).size.width,
+      height: bodyContainerHeight(),
+      decoration: BoxDecoration(
+        color: Color(0xfff2f3f5),
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(40.0),
+          topRight: Radius.circular(40.0),
+        ),
+      ),
+      child: allCoursesList(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xfff2f3f5),
-      appBar: AppBar(
-        title: Text(
-          "All Courses",
-          style: TextStyle(
-            color: Color(0xff3385e8),
-            fontSize: 28.0,
-          ),
-        ),
-        centerTitle: true,
-        backgroundColor: Color(0xfff2f3f5),
-        elevation: 0.0,
-        iconTheme: IconThemeData(
-          color: Color(0xff3385e8),
-          size: 50.0,
+      body: SingleChildScrollView(
+        child: Stack(
+          children: [
+            categoryImage(),
+            courseList(),
+          ],
         ),
       ),
-      body: Padding(
-          padding: EdgeInsets.symmetric(vertical: 20.0),
-          child: allCoursesList()),
     );
   }
 }

@@ -3,6 +3,7 @@ import 'package:ehs/Course/allcourses.dart';
 import 'package:ehs/Home/category.dart';
 import 'package:ehs/Home/homeslider.dart';
 import 'package:ehs/Home/topcourse.dart';
+import 'package:ehs/animations/slideanimation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -113,9 +114,7 @@ class _HomeState extends State<Home> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                          builder: (BuildContext context) => AllCourses(),
-                        ),
+                        SlideBottomRoute(page: AllCourses()),
                       );
                     },
                     child: Text(
