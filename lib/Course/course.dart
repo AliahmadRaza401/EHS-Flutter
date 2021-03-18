@@ -177,7 +177,11 @@ class _CoursePageState extends State<CoursePage> {
             Align(
               alignment: Alignment.bottomRight,
               child: Padding(
-                padding: EdgeInsets.only(top: 20.0, bottom: 10.0, right: 10.0,),
+                padding: EdgeInsets.only(
+                  top: 20.0,
+                  bottom: 10.0,
+                  right: 10.0,
+                ),
                 child: FloatingActionButton(
                   onPressed: () {},
                   child: Icon(

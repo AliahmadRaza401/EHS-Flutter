@@ -2,7 +2,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 class SliderHome extends StatefulWidget {
-
   //slider card
   @override
   _SliderHomeState createState() => _SliderHomeState();
