@@ -19,7 +19,7 @@ class _CategoryPageState extends State<CategoryPage> {
     if (MediaQuery.of(context).orientation == Orientation.portrait) {
       return MediaQuery.of(context).size.height * .34;
     } else {
-      return MediaQuery.of(context).size.height * .66;
+      return MediaQuery.of(context).size.height * .5;
     }
   }
 
@@ -28,7 +28,7 @@ class _CategoryPageState extends State<CategoryPage> {
     if (MediaQuery.of(context).orientation == Orientation.portrait) {
       return MediaQuery.of(context).size.height * .27;
     } else {
-      return MediaQuery.of(context).size.height * .5;
+      return MediaQuery.of(context).size.height * .36;
     }
   }
 
@@ -208,13 +208,11 @@ class _CategoryPageState extends State<CategoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xfff2f3f5),
-      body: SingleChildScrollView(
-        child: Stack(
-          children: [
-            categoryImage(),
-            courseList(),
-          ],
-        ),
+      body: Stack(
+        children: [
+          categoryImage(),
+          courseList(),
+        ],
       ),
     );
   }

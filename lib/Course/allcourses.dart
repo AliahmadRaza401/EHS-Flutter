@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:ehs/Course/course.dart';
 import 'package:ehs/animations/scaleanimation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 class AllCourses extends StatefulWidget {
   @override
@@ -12,25 +13,25 @@ class _AllCoursesState extends State<AllCourses> {
   //responsive height
   dynamic height() {
     if (MediaQuery.of(context).orientation == Orientation.portrait) {
-      return MediaQuery.of(context).size.height * .34;
+      return MediaQuery.of(context).size.height * .3;
     } else {
-      return MediaQuery.of(context).size.height * .66;
+      return MediaQuery.of(context).size.height * .44;
     }
   }
 
   //responsive body height
   dynamic bodyHeight() {
     if (MediaQuery.of(context).orientation == Orientation.portrait) {
-      return MediaQuery.of(context).size.height * .27;
+      return MediaQuery.of(context).size.height * .22;
     } else {
-      return MediaQuery.of(context).size.height * .5;
+      return MediaQuery.of(context).size.height * .34;
     }
   }
 
   //responsive body container height
   dynamic bodyContainerHeight() {
     if (MediaQuery.of(context).orientation == Orientation.portrait) {
-      return MediaQuery.of(context).size.height * .72;
+      return MediaQuery.of(context).size.height * 1;
     } else {
       return MediaQuery.of(context).size.height * .9;
     }
@@ -203,13 +204,11 @@ class _AllCoursesState extends State<AllCourses> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xfff2f3f5),
-      body: SingleChildScrollView(
-        child: Stack(
-          children: [
-            categoryImage(),
-            courseList(),
-          ],
-        ),
+      body: Stack(
+        children: [
+          categoryImage(),
+          courseList(),
+        ],
       ),
     );
   }
