@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:ehs/Course/course.dart';
 import 'package:ehs/animations/scaleanimation.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TopCourses extends StatefulWidget {
@@ -38,6 +39,7 @@ class _TopCoursesState extends State<TopCourses> {
         );
       },
       child: Container(
+        padding: EdgeInsets.all(10.0),
         width: width(),
         height: 120,
         decoration: BoxDecoration(
@@ -58,7 +60,7 @@ class _TopCoursesState extends State<TopCourses> {
           alignment: Alignment.center,
           child: AutoSizeText(
             '${widget.title}',
-            maxLines: 1,
+            maxLines: 3,
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.black,

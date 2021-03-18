@@ -138,7 +138,7 @@ class _HomeState extends State<Home> {
                 spacing: 20.0,
                 children: [
                   TopCourses(
-                    title: "hi",
+                    title: "Integrated Arts and something",
                     image: "assets/sliderimage.jpg",
                   ),
                   Padding(
