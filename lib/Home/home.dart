@@ -42,11 +42,11 @@ class _HomeState extends State<Home> {
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Color(0xff3385e8), width: 2.0),
-          borderRadius: BorderRadius.circular(14.0),
+          borderRadius: BorderRadius.circular(12.0),
         ),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Color(0xff8cbaf2), width: 2.0),
-          borderRadius: BorderRadius.circular(14.0),
+          borderRadius: BorderRadius.circular(12.0),
         ),
         border: InputBorder.none,
         hintText: 'Search your course..',
@@ -67,143 +67,162 @@ class _HomeState extends State<Home> {
     return Scaffold(
       backgroundColor: Color(0xfff2f3f5),
       body: SingleChildScrollView(
-        child: FutureBuilder(
-          future: data,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return Column(
-                children: [
-                  //slider
-                  SliderHome(),
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/ehsLogo.png"),
+              fit: BoxFit.fitWidth,
+              colorFilter: ColorFilter.mode(Color(0xfff2f3f5).withOpacity(0.05), BlendMode.dstATop),
+            ),
+          ),
+          child: FutureBuilder(
+            future: data,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return Column(
+                  children: [
+                    //slider
+                    SliderHome(),
 
-                  //search bar
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 30.0,
-                      vertical: 20.0,
+                    //search bar
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 30.0,
+                        vertical: 20.0,
+                      ),
+                      child: searchBar(),
                     ),
-                    child: searchBar(),
-                  ),
 
-                  //category heading
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(20.0, 30.0, 20.0, 6.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Categories",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24.0,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  //category list
-                  CourseCategory(),
-
-                  //Top courses heading
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 10.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        AutoSizeText(
-                          "Top Courses",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24.0,
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              SlideBottomRoute(page: AllCourses()),
-                            );
-                          },
-                          child: Text(
-                            "See All",
+                    //category heading
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(20.0, 30.0, 20.0, 6.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Categories",
                             style: TextStyle(
-                              color: Color(0xff3385e8),
-                              fontSize: 14.0,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 24.0,
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
 
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 50.0),
-                    child: Wrap(
-                      direction: Axis.horizontal,
-                      alignment: WrapAlignment.start,
-                      runSpacing: 20.0,
-                      spacing: 20.0,
+                    //category list
+                    CourseCategory(),
+
+                    //Top courses heading
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 10.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          AutoSizeText(
+                            "Top Courses",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 24.0,
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                SlideBottomRoute(page: AllCourses()),
+                              );
+                            },
+                            child: Text(
+                              "See All",
+                              style: TextStyle(
+                                color: Color(0xff3385e8),
+                                fontSize: 14.0,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 50.0),
+                      child: Wrap(
+                        direction: Axis.horizontal,
+                        alignment: WrapAlignment.start,
+                        runSpacing: 20.0,
+                        spacing: 20.0,
+                        children: [
+                          TopCourses(
+                            title: snapshot.data[0]["course_name"],
+                            image: snapshot.data[0]["course_image"],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              top: 25.0,
+                            ),
+                            child: TopCourses(
+                              title: snapshot.data[1]["course_name"],
+                              image: snapshot.data[1]["course_image"],
+                            ),
+                          ),
+                          TopCourses(
+                            title: snapshot.data[2]["course_name"],
+                            image: snapshot.data[2]["course_image"],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              top: 25.0,
+                            ),
+                            child: TopCourses(
+                              title: snapshot.data[3]["course_name"],
+                              image: snapshot.data[3]["course_image"],
+                            ),
+                          ),
+                          TopCourses(
+                            title: snapshot.data[4]["course_name"],
+                            image: snapshot.data[4]["course_image"],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              top: 25.0,
+                            ),
+                            child: TopCourses(
+                              title: snapshot.data[5]["course_name"],
+                              image: snapshot.data[5]["course_image"],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                );
+              } else if (snapshot.hasError) {
+                return Text("${snapshot.error}");
+              }
+
+              return Container(
+                margin: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height / 2.0,
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        TopCourses(
-                          title: snapshot.data[0]["course_name"],
-                          image: snapshot.data[0]["course_image"],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            top: 25.0,
-                          ),
-                          child: TopCourses(
-                            title: snapshot.data[1]["course_name"],
-                            image: snapshot.data[1]["course_image"],
-                          ),
-                        ),
-                        TopCourses(
-                          title: snapshot.data[2]["course_name"],
-                          image: snapshot.data[2]["course_image"],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            top: 25.0,
-                          ),
-                          child: TopCourses(
-                            title: snapshot.data[3]["course_name"],
-                            image: snapshot.data[3]["course_image"],
-                          ),
-                        ),
-                        TopCourses(
-                          title: snapshot.data[4]["course_name"],
-                          image: snapshot.data[4]["course_image"],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            top: 25.0,
-                          ),
-                          child: TopCourses(
-                            title: snapshot.data[5]["course_name"],
-                            image: snapshot.data[5]["course_image"],
+                        JumpingText(
+                          "Elite High School...",
+                          style: TextStyle(
+                            fontSize: 20.0,
                           ),
                         ),
                       ],
                     ),
-                  ),
-                ],
+                  ],
+                ),
               );
-            } else if (snapshot.hasError) {
-              return Text("${snapshot.error}");
-            }
-
-            return Container(
-              margin: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height / 2.0,
-              ),
-              child: JumpingDotsProgressIndicator(
-                numberOfDots: 5,
-                color: Color(0xff3385e8),
-                fontSize: 80.0,
-              ),
-            );
-          },
+            },
+          ),
         ),
       ),
     );

@@ -41,6 +41,15 @@ class _AllCoursesState extends State<AllCourses> {
     }
   }
 
+  //responsive appbar height
+  dynamic appBarHeight() {
+    if (MediaQuery.of(context).orientation == Orientation.portrait) {
+      return MediaQuery.of(context).size.height * .1;
+    } else {
+      return MediaQuery.of(context).size.height * .17;
+    }
+  }
+
   //category image
   Widget categoryImage() {
     return Stack(
@@ -57,7 +66,7 @@ class _AllCoursesState extends State<AllCourses> {
           ),
         ),
         Container(
-          height: MediaQuery.of(context).size.height * .1,
+          height: appBarHeight(),
           child: AppBar(
             title: AutoSizeText(
               'All Courses',
@@ -158,10 +167,20 @@ class _AllCoursesState extends State<AllCourses> {
               margin: EdgeInsets.only(
                 top: MediaQuery.of(context).size.height / 2.5,
               ),
-              child: JumpingDotsProgressIndicator(
-                numberOfDots: 5,
-                color: Color(0xff3385e8),
-                fontSize: 80.0,
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      JumpingText(
+                        "Elite High School...",
+                        style: TextStyle(
+                          fontSize: 20.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             );
           },
