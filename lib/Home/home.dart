@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:ehs/Api/apidata.dart';
 import 'package:ehs/Course/allcourses.dart';
 import 'package:ehs/Home/category.dart';
 import 'package:ehs/Home/homeslider.dart';
@@ -6,6 +7,7 @@ import 'package:ehs/Home/topcourse.dart';
 import 'package:ehs/animations/slideanimation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:progress_indicators/progress_indicators.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -13,6 +15,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final data = ApiData().fetchCourses();
+
   //searchbar widget
   Widget searchBar() {
     return TextFormField(
@@ -63,123 +67,143 @@ class _HomeState extends State<Home> {
     return Scaffold(
       backgroundColor: Color(0xfff2f3f5),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            //slider
-            SliderHome(),
-
-            //search bar
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 30.0,
-                vertical: 20.0,
-              ),
-              child: searchBar(),
-            ),
-
-            //category heading
-            Padding(
-              padding: EdgeInsets.fromLTRB(20.0, 30.0, 20.0, 6.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+        child: FutureBuilder(
+          future: data,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return Column(
                 children: [
-                  Text(
-                    "Categories",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24.0,
+                  //slider
+                  SliderHome(),
+
+                  //search bar
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 30.0,
+                      vertical: 20.0,
+                    ),
+                    child: searchBar(),
+                  ),
+
+                  //category heading
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(20.0, 30.0, 20.0, 6.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Categories",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24.0,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  //category list
+                  CourseCategory(),
+
+                  //Top courses heading
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        AutoSizeText(
+                          "Top Courses",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24.0,
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              SlideBottomRoute(page: AllCourses()),
+                            );
+                          },
+                          child: Text(
+                            "See All",
+                            style: TextStyle(
+                              color: Color(0xff3385e8),
+                              fontSize: 14.0,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 50.0),
+                    child: Wrap(
+                      direction: Axis.horizontal,
+                      alignment: WrapAlignment.start,
+                      runSpacing: 20.0,
+                      spacing: 20.0,
+                      children: [
+                        TopCourses(
+                          title: snapshot.data[0]["course_name"],
+                          image: snapshot.data[0]["course_image"],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            top: 25.0,
+                          ),
+                          child: TopCourses(
+                            title: snapshot.data[1]["course_name"],
+                            image: snapshot.data[1]["course_image"],
+                          ),
+                        ),
+                        TopCourses(
+                          title: snapshot.data[2]["course_name"],
+                          image: snapshot.data[2]["course_image"],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            top: 25.0,
+                          ),
+                          child: TopCourses(
+                            title: snapshot.data[3]["course_name"],
+                            image: snapshot.data[3]["course_image"],
+                          ),
+                        ),
+                        TopCourses(
+                          title: snapshot.data[4]["course_name"],
+                          image: snapshot.data[4]["course_image"],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            top: 25.0,
+                          ),
+                          child: TopCourses(
+                            title: snapshot.data[5]["course_name"],
+                            image: snapshot.data[5]["course_image"],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
-              ),
-            ),
+              );
+            } else if (snapshot.hasError) {
+              return Text("${snapshot.error}");
+            }
 
-            //category list
-            CourseCategory(),
-
-            //Top courses heading
-            Padding(
-              padding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 10.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  AutoSizeText(
-                    "Top Courses",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24.0,
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        SlideBottomRoute(page: AllCourses()),
-                      );
-                    },
-                    child: Text(
-                      "See All",
-                      style: TextStyle(
-                        color: Color(0xff3385e8),
-                        fontSize: 14.0,
-                      ),
-                    ),
-                  ),
-                ],
+            return Container(
+              margin: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height / 2.0,
               ),
-            ),
-
-            Padding(
-              padding: EdgeInsets.only(bottom: 50.0),
-              child: Wrap(
-                direction: Axis.horizontal,
-                alignment: WrapAlignment.start,
-                runSpacing: 20.0,
-                spacing: 20.0,
-                children: [
-                  TopCourses(
-                    title: "Integrated Arts and something",
-                    image: "assets/sliderimage.jpg",
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      top: 25.0,
-                    ),
-                    child: TopCourses(
-                      title: "2",
-                      image: "assets/sliderimage.jpg",
-                    ),
-                  ),
-                  TopCourses(
-                    title: "hi",
-                    image: "assets/sliderimage.jpg",
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      top: 25.0,
-                    ),
-                    child: TopCourses(
-                      title: "hi",
-                      image: "assets/sliderimage.jpg",
-                    ),
-                  ),
-                  TopCourses(
-                    title: "hi",
-                    image: "assets/sliderimage.jpg",
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      top: 25.0,
-                    ),
-                    child: TopCourses(
-                      title: "hi",
-                      image: "assets/sliderimage.jpg",
-                    ),
-                  ),
-                ],
+              child: JumpingDotsProgressIndicator(
+                numberOfDots: 5,
+                color: Color(0xff3385e8),
+                fontSize: 80.0,
               ),
-            ),
-          ],
+            );
+          },
         ),
       ),
     );

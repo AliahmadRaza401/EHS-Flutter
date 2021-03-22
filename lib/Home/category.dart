@@ -94,7 +94,7 @@ class _CourseCategoryState extends State<CourseCategory> {
             courseCard('English', 'assets/english.jpg'),
             courseCard('English as a Second Language', 'assets/english.jpg'),
             courseCard('Native Studies', 'assets/native_studies.jpg'),
-            courseCard('French Courses', 'assets/french_courses.jpg'),
+            courseCard('French as a Second Language', 'assets/french_courses.jpg'),
             courseCard('Career Education', 'assets/career_education.jpg'),
             courseCard('Health Education', 'assets/health_education.jpg'),
             courseCard('Interdisciplinary Studies',

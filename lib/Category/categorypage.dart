@@ -1,8 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:ehs/Api/apidata.dart';
 import 'package:ehs/Course/course.dart';
 import 'package:ehs/animations/scaleanimation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:progress_indicators/progress_indicators.dart';
 
 class CategoryPage extends StatefulWidget {
   String name, image;
@@ -14,6 +16,42 @@ class CategoryPage extends StatefulWidget {
 }
 
 class _CategoryPageState extends State<CategoryPage> {
+  final data = ApiData().fetchCourses();
+
+  //dialog
+  dialog(String text) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Alert'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(text),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text(
+                'Ok',
+                style: TextStyle(
+                  color: Color(0xff3d3dd9),
+                  fontSize: 18,
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   //responsive height
   dynamic height() {
     if (MediaQuery.of(context).orientation == Orientation.portrait) {
@@ -57,7 +95,7 @@ class _CategoryPageState extends State<CategoryPage> {
           ),
         ),
         Container(
-          height: 80,
+          height: MediaQuery.of(context).size.height * .1,
           child: AppBar(
             title: AutoSizeText(
               '${widget.name}',
@@ -110,7 +148,7 @@ class _CategoryPageState extends State<CategoryPage> {
           child: ListTile(
             leading: ClipRRect(
               borderRadius: BorderRadius.circular(12.0),
-              child: Image.asset(
+              child: Image.network(
                 cardImage,
                 fit: BoxFit.fill,
               ),
@@ -136,48 +174,44 @@ class _CategoryPageState extends State<CategoryPage> {
         width: MediaQuery.of(context).size.width * .9,
         child: ListView(
           children: <Widget>[
-            allCourseCard(
-                'Subject 1', 'Credit Hour : 3', 'assets/sliderimage.jpg'),
-            allCourseCard(
-                'Subject 1', 'Credit Hour : 3', 'assets/sliderimage.jpg'),
-            allCourseCard(
-                'Subject 1', 'Credit Hour : 3', 'assets/sliderimage.jpg'),
-            allCourseCard(
-                'Subject 1', 'Credit Hour : 3', 'assets/sliderimage.jpg'),
-            allCourseCard(
-                'Subject 1', 'Credit Hour : 3', 'assets/sliderimage.jpg'),
-            allCourseCard(
-                'Subject 1', 'Credit Hour : 3', 'assets/sliderimage.jpg'),
-            allCourseCard(
-                'Subject 1', 'Credit Hour : 3', 'assets/sliderimage.jpg'),
-            allCourseCard(
-                'Subject 1', 'Credit Hour : 3', 'assets/sliderimage.jpg'),
-            allCourseCard(
-                'Subject 1', 'Credit Hour : 3', 'assets/sliderimage.jpg'),
-            allCourseCard(
-                'Subject 1', 'Credit Hour : 3', 'assets/sliderimage.jpg'),
-            allCourseCard(
-                'Subject 1', 'Credit Hour : 3', 'assets/sliderimage.jpg'),
-            allCourseCard(
-                'Subject 1', 'Credit Hour : 3', 'assets/sliderimage.jpg'),
-            allCourseCard(
-                'Subject 1', 'Credit Hour : 3', 'assets/sliderimage.jpg'),
-            allCourseCard(
-                'Subject 1', 'Credit Hour : 3', 'assets/sliderimage.jpg'),
-            allCourseCard(
-                'Subject 1', 'Credit Hour : 3', 'assets/sliderimage.jpg'),
-            allCourseCard(
-                'Subject 1', 'Credit Hour : 3', 'assets/sliderimage.jpg'),
-            allCourseCard(
-                'Subject 1', 'Credit Hour : 3', 'assets/sliderimage.jpg'),
-            allCourseCard(
-                'Subject 1', 'Credit Hour : 3', 'assets/sliderimage.jpg'),
-            allCourseCard(
-                'Subject 1', 'Credit Hour : 3', 'assets/sliderimage.jpg'),
-            allCourseCard(
-                'Subject 1', 'Credit Hour : 3', 'assets/sliderimage.jpg'),
-            allCourseCard(
-                'Subject 1', 'Credit Hour : 3', 'assets/sliderimage.jpg'),
+            FutureBuilder(
+              future: data,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return SingleChildScrollView(
+                    child: Container(
+                      height: bodyContainerHeight(),
+                      child: ListView.builder(
+                        itemCount: snapshot.data.length,
+                        itemBuilder: (context, i) {
+                          if (snapshot.data[i]['course_department'] ==
+                              widget.name.toLowerCase()) {
+                            return allCourseCard(
+                              snapshot.data[i]['course_name'],
+                              snapshot.data[i]['course_credit_value'],
+                              snapshot.data[i]['course_image'],
+                            );
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                  );
+                } else if (snapshot.hasError) {
+                  return Text("${snapshot.error}");
+                }
+                return Container(
+                  margin: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height / 2.5,
+                  ),
+                  child: JumpingDotsProgressIndicator(
+                    numberOfDots: 5,
+                    color: Color(0xff3385e8),
+                    fontSize: 80.0,
+                  ),
+                );
+              },
+            ),
           ],
         ),
       ),

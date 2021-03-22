@@ -1,8 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:ehs/Api/apidata.dart';
 import 'package:ehs/Course/course.dart';
 import 'package:ehs/animations/scaleanimation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:progress_indicators/progress_indicators.dart';
 
 class AllCourses extends StatefulWidget {
   @override
@@ -10,6 +12,8 @@ class AllCourses extends StatefulWidget {
 }
 
 class _AllCoursesState extends State<AllCourses> {
+  final data = ApiData().fetchCourses();
+
   //responsive height
   dynamic height() {
     if (MediaQuery.of(context).orientation == Orientation.portrait) {
@@ -47,13 +51,13 @@ class _AllCoursesState extends State<AllCourses> {
           height: height(),
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/sliderimage.jpg'),
+              image: AssetImage('assets/allCourses.jpg'),
               fit: BoxFit.fill,
             ),
           ),
         ),
         Container(
-          height: 80,
+          height: MediaQuery.of(context).size.height * .1,
           child: AppBar(
             title: AutoSizeText(
               'All Courses',
@@ -106,13 +110,13 @@ class _AllCoursesState extends State<AllCourses> {
           child: ListTile(
             leading: ClipRRect(
               borderRadius: BorderRadius.circular(12.0),
-              child: Image.asset(
+              child: Image.network(
                 cardImage,
                 fit: BoxFit.fill,
               ),
             ),
             title: Text(cardTitle),
-            subtitle: Text(cardSubTitle),
+            subtitle: Text('Credit Hour : $cardSubTitle'),
             trailing: Icon(
               Icons.navigate_next_rounded,
               color: Color(0xff3385e3),
@@ -130,51 +134,37 @@ class _AllCoursesState extends State<AllCourses> {
       alignment: Alignment.center,
       child: Container(
         width: MediaQuery.of(context).size.width * .9,
-        child: ListView(
-          children: <Widget>[
-            allCourseCard(
-                'Subject 1', 'Credit Hour : 3', 'assets/sliderimage.jpg'),
-            allCourseCard(
-                'Subject 1', 'Credit Hour : 3', 'assets/sliderimage.jpg'),
-            allCourseCard(
-                'Subject 1', 'Credit Hour : 3', 'assets/sliderimage.jpg'),
-            allCourseCard(
-                'Subject 1', 'Credit Hour : 3', 'assets/sliderimage.jpg'),
-            allCourseCard(
-                'Subject 1', 'Credit Hour : 3', 'assets/sliderimage.jpg'),
-            allCourseCard(
-                'Subject 1', 'Credit Hour : 3', 'assets/sliderimage.jpg'),
-            allCourseCard(
-                'Subject 1', 'Credit Hour : 3', 'assets/sliderimage.jpg'),
-            allCourseCard(
-                'Subject 1', 'Credit Hour : 3', 'assets/sliderimage.jpg'),
-            allCourseCard(
-                'Subject 1', 'Credit Hour : 3', 'assets/sliderimage.jpg'),
-            allCourseCard(
-                'Subject 1', 'Credit Hour : 3', 'assets/sliderimage.jpg'),
-            allCourseCard(
-                'Subject 1', 'Credit Hour : 3', 'assets/sliderimage.jpg'),
-            allCourseCard(
-                'Subject 1', 'Credit Hour : 3', 'assets/sliderimage.jpg'),
-            allCourseCard(
-                'Subject 1', 'Credit Hour : 3', 'assets/sliderimage.jpg'),
-            allCourseCard(
-                'Subject 1', 'Credit Hour : 3', 'assets/sliderimage.jpg'),
-            allCourseCard(
-                'Subject 1', 'Credit Hour : 3', 'assets/sliderimage.jpg'),
-            allCourseCard(
-                'Subject 1', 'Credit Hour : 3', 'assets/sliderimage.jpg'),
-            allCourseCard(
-                'Subject 1', 'Credit Hour : 3', 'assets/sliderimage.jpg'),
-            allCourseCard(
-                'Subject 1', 'Credit Hour : 3', 'assets/sliderimage.jpg'),
-            allCourseCard(
-                'Subject 1', 'Credit Hour : 3', 'assets/sliderimage.jpg'),
-            allCourseCard(
-                'Subject 1', 'Credit Hour : 3', 'assets/sliderimage.jpg'),
-            allCourseCard(
-                'Subject 1', 'Credit Hour : 3', 'assets/sliderimage.jpg'),
-          ],
+        child: FutureBuilder(
+          future: data,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return Container(
+                height: bodyContainerHeight(),
+                child: ListView.builder(
+                  itemCount: snapshot.data.length,
+                  itemBuilder: (context, i) {
+                    return allCourseCard(
+                      snapshot.data[i]['course_name'],
+                      snapshot.data[i]['course_credit_value'],
+                      snapshot.data[i]['course_image'],
+                    );
+                  },
+                ),
+              );
+            } else if (snapshot.hasError) {
+              return Text("${snapshot.error}");
+            }
+            return Container(
+              margin: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height / 2.5,
+              ),
+              child: JumpingDotsProgressIndicator(
+                numberOfDots: 5,
+                color: Color(0xff3385e8),
+                fontSize: 80.0,
+              ),
+            );
+          },
         ),
       ),
     );

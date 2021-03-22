@@ -1,5 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:ehs/Api/apidata.dart';
 import 'package:flutter/material.dart';
+import 'package:progress_indicators/progress_indicators.dart';
 
 class CoursePage extends StatefulWidget {
   String courseName, courseImage;
@@ -11,6 +13,8 @@ class CoursePage extends StatefulWidget {
 }
 
 class _CoursePageState extends State<CoursePage> {
+  final data = ApiData().fetchCourses();
+
   //responsive height
   dynamic height() {
     if (MediaQuery.of(context).orientation == Orientation.portrait) {
@@ -47,13 +51,13 @@ class _CoursePageState extends State<CoursePage> {
           height: height(),
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('${widget.courseImage}'),
+              image: NetworkImage('${widget.courseImage}'),
               fit: BoxFit.fill,
             ),
           ),
         ),
         Container(
-          height: 80,
+          height: MediaQuery.of(context).size.height * .1,
           child: AppBar(
             title: Text(
               '${widget.courseName}',
@@ -81,10 +85,15 @@ class _CoursePageState extends State<CoursePage> {
   }
 
   //course body
-  Widget courseBody() {
+  Widget courseBody(
+    String courseType,
+    String courseCode,
+    String courseCr,
+    String courseDesc,
+  ) {
     return Container(
       margin: EdgeInsets.only(top: bodyHeight()),
-      padding: EdgeInsets.only(top: 50.0),
+      padding: EdgeInsets.only(top: 50.0, bottom: 30.0,),
       width: MediaQuery.of(context).size.width,
       height: bodyContainerHeight(),
       decoration: BoxDecoration(
@@ -96,102 +105,152 @@ class _CoursePageState extends State<CoursePage> {
       ),
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 30.0),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'CAD \$ 30',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 22.0,
-                  ),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.play_circle_fill_rounded,
-                    size: 50.0,
-                    color: Color(0xff3385e8),
-                  ),
-                  padding: EdgeInsets.all(0),
-                  visualDensity: VisualDensity.adaptivePlatformDensity,
-                ),
-              ],
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  AutoSizeText(
-                    'Paid',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                    ),
-                  ),
-                  AutoSizeText(
-                    'Code: CS-432',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                    ),
-                  ),
-                  AutoSizeText(
-                    'Cr. Hr : 3',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 30.0),
-              child: Row(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text(
-                    "Description",
+                    courseCode,
                     style: TextStyle(
-                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22.0,
                     ),
                   ),
                 ],
               ),
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              margin: EdgeInsets.only(top: 10.0),
-              padding: EdgeInsets.all(20.0),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20.0),
-              ),
-              child: AutoSizeText(
-                "This is description of the subject that is selected. This is description of the subject that is selected. This is description of the subject that is selected.",
-                style: TextStyle(
-                  fontSize: 16,
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.bottomRight,
-              child: Padding(
+              Padding(
                 padding: EdgeInsets.only(
                   top: 20.0,
-                  bottom: 10.0,
-                  right: 10.0,
+                  bottom: 20.0,
                 ),
-                child: FloatingActionButton(
-                  onPressed: () {},
-                  child: Icon(
-                    Icons.add_shopping_cart_rounded,
-                    size: 36.0,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    AutoSizeText(
+                      courseType,
+                      style: TextStyle(
+                        fontSize: 16.0,
+                      ),
+                    ),
+                    AutoSizeText(
+                      'Cr. Hr : $courseCr',
+                      style: TextStyle(
+                        fontSize: 16.0,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton.icon(
+                    onPressed: () {},
+                    style: ButtonStyle(
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6.0),
+                      )),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                        Color(0xff3385e8),
+                      ),
+                    ),
+                    icon: Icon(
+                      Icons.add_shopping_cart_rounded,
+                    ),
+                    label: Text(
+                      "Buy Now",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16.0,
+                      ),
+                    ),
+                  ),
+                  ElevatedButton.icon(
+                    onPressed: () {},
+                    style: ButtonStyle(
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6.0),
+                      )),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                        Color(0xff3385e8),
+                      ),
+                    ),
+                    icon: Icon(
+                      Icons.play_arrow_rounded,
+                      size: 30.0,
+                    ),
+                    label: Text(
+                      "Preview",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16.0,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 30.0),
+                child: Row(
+                  children: [
+                    Text(
+                      "Description",
+                      style: TextStyle(
+                        fontSize: 20.0,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                margin: EdgeInsets.only(top: 10.0),
+                padding: EdgeInsets.all(20.0),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                child: AutoSizeText(
+                  courseDesc,
+                  style: TextStyle(
+                    fontSize: 16,
                   ),
                 ),
               ),
-            ),
-          ],
+              Padding(
+                padding: EdgeInsets.only(top: 30.0),
+                child: Row(
+                  children: [
+                    Text(
+                      "Prerequisites",
+                      style: TextStyle(
+                        fontSize: 20.0,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                margin: EdgeInsets.only(top: 10.0),
+                padding: EdgeInsets.all(20.0),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                child: AutoSizeText(
+                  courseDesc,
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -200,13 +259,39 @@ class _CoursePageState extends State<CoursePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Stack(
-          children: [
-            courseIntro(),
-            courseBody(),
-          ],
-        ),
+      body: FutureBuilder(
+        future: data,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            for (int i = 0; i < snapshot.data.length; i++) {
+              if (snapshot.data[i]["course_name"] == widget.courseName) {
+                return Stack(
+                  children: [
+                    courseIntro(),
+                    courseBody(
+                      snapshot.data[i]["course_type"],
+                      snapshot.data[i]["course_code"],
+                      snapshot.data[i]["course_credit_value"],
+                      snapshot.data[i]["course_description"],
+                    ),
+                  ],
+                );
+              }
+            }
+          } else if (snapshot.hasError) {
+            return Text("${snapshot.error}");
+          }
+          return Container(
+            margin: EdgeInsets.only(
+              top: MediaQuery.of(context).size.height / 2.0,
+            ),
+            child: JumpingDotsProgressIndicator(
+              numberOfDots: 5,
+              color: Color(0xff3385e8),
+              fontSize: 80.0,
+            ),
+          );
+        },
       ),
     );
   }

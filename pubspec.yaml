@@ -24,6 +24,8 @@ dependencies:
   carousel_slider: ^3.0.0
   auto_size_text: ^2.1.0
   curved_navigation_bar: ^0.3.7
+  http: any
+  progress_indicators: any
   flutter:
     sdk: flutter
 

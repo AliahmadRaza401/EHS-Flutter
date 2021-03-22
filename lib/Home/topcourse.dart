@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:ehs/Course/course.dart';
 import 'package:ehs/animations/scaleanimation.dart';
@@ -45,7 +47,7 @@ class _TopCoursesState extends State<TopCourses> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20.0),
           image: DecorationImage(
-            image: AssetImage('${widget.image}'),
+            image: NetworkImage('${widget.image}'),
             fit: BoxFit.fill,
           ),
           boxShadow: [
@@ -60,12 +62,20 @@ class _TopCoursesState extends State<TopCourses> {
           alignment: Alignment.center,
           child: AutoSizeText(
             '${widget.title}',
-            maxLines: 3,
+
+            maxLines: 2,
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: Colors.black,
-              fontSize: 28.0,
+              color: Colors.white,
+              fontSize: 22.0,
               fontWeight: FontWeight.bold,
+              shadows: [
+                Shadow(
+                  blurRadius: 12.0,
+                  color: Colors.black,
+                  offset: Offset(1.0, 1.0),
+                ),
+              ],
             ),
           ),
         ),
