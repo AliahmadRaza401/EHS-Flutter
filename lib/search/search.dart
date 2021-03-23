@@ -2,20 +2,18 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:ehs/Api/apidata.dart';
 import 'package:ehs/Course/course.dart';
 import 'package:ehs/animations/scaleanimation.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 
-class CategoryPage extends StatefulWidget {
-  String name, image;
+class SearchPage extends StatefulWidget {
+  String queryResults;
 
-  CategoryPage({this.name, this.image});
-
+  SearchPage({this.queryResults});
   @override
-  _CategoryPageState createState() => _CategoryPageState();
+  _SearchPageState createState() => _SearchPageState();
 }
 
-class _CategoryPageState extends State<CategoryPage> {
+class _SearchPageState extends State<SearchPage> {
   final data = ApiData().fetchCourses();
 
   //responsive height
@@ -64,7 +62,7 @@ class _CategoryPageState extends State<CategoryPage> {
           height: height(),
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('${widget.image}'),
+              image: AssetImage('assets/allCourses.jpg'),
               fit: BoxFit.fill,
             ),
           ),
@@ -72,14 +70,6 @@ class _CategoryPageState extends State<CategoryPage> {
         Container(
           height: appBarHeight(),
           child: AppBar(
-            title: AutoSizeText(
-              '${widget.name}',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 22.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
             iconTheme: IconThemeData(
               color: Colors.white,
             ),
@@ -88,7 +78,6 @@ class _CategoryPageState extends State<CategoryPage> {
                 bottom: Radius.circular(24),
               ),
             ),
-            centerTitle: true,
             backgroundColor: Color(0xfff2f3f5).withOpacity(.3),
             elevation: 2.0,
           ),
@@ -159,8 +148,7 @@ class _CategoryPageState extends State<CategoryPage> {
                       child: ListView.builder(
                         itemCount: snapshot.data.length,
                         itemBuilder: (context, i) {
-                          if (snapshot.data[i]['course_department'] ==
-                              widget.name.toLowerCase()) {
+                          if (snapshot.data[i]['course_name'].toString().toLowerCase().contains(widget.queryResults.toLowerCase())) {
                             return allCourseCard(
                               snapshot.data[i]['course_name'],
                               snapshot.data[i]['course_credit_value'],
@@ -172,6 +160,7 @@ class _CategoryPageState extends State<CategoryPage> {
                               height: 0.0,
                             );
                           }
+                          return null;
                         },
                       ),
                     ),

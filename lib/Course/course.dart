@@ -309,7 +309,8 @@ class _CoursePageState extends State<CoursePage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("No Internet Connection!",
+                      Text(
+                        "No Internet Connection!",
                         style: TextStyle(
                           fontSize: 20.0,
                         ),

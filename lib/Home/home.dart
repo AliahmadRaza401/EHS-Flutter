@@ -5,9 +5,12 @@ import 'package:ehs/Home/category.dart';
 import 'package:ehs/Home/homeslider.dart';
 import 'package:ehs/Home/topcourse.dart';
 import 'package:ehs/animations/slideanimation.dart';
+import 'package:ehs/search/search.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:progress_indicators/progress_indicators.dart';
+
+final searchquery = TextEditingController();
 
 class Home extends StatefulWidget {
   @override
@@ -22,6 +25,13 @@ class _HomeState extends State<Home> {
     return TextFormField(
       initialValue: null,
       autocorrect: true,
+      controller: searchquery,
+      validator: (query) {
+        if (query.isEmpty) {
+          return 'Enter Search Query';
+        }
+        return null;
+      },
       keyboardAppearance: Brightness.dark,
       keyboardType: TextInputType.name,
       style: TextStyle(
@@ -34,9 +44,7 @@ class _HomeState extends State<Home> {
       cursorWidth: 2.0,
       cursorHeight: 26.0,
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.symmetric(
-          vertical: 2.0,
-        ),
+        contentPadding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 10.0),
         errorStyle: TextStyle(
           fontSize: 15.0,
         ),
@@ -54,9 +62,28 @@ class _HomeState extends State<Home> {
           color: Color(0xff3385e8),
           fontSize: 16.0,
         ),
-        prefixIcon: Icon(
-          Icons.search_rounded,
-          color: Color(0xff3385e8),
+        suffixIcon: Container(
+          decoration: BoxDecoration(
+              color: Color(0xff3385e8),
+              borderRadius: BorderRadius.only(
+                bottomRight: Radius.circular(12),
+                topRight: Radius.circular(12),
+              )),
+          child: IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                SlideBottomRoute(
+                  page: SearchPage(
+                    queryResults: searchquery.text,
+                  ),
+                ),
+              );
+            },
+            icon: Icon(Icons.search),
+            color: Colors.white,
+            // disabledColor: Colors.white,
+          ),
         ),
       ),
     );
@@ -218,10 +245,11 @@ class _HomeState extends State<Home> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("No Internet Connection!",
-                          style: TextStyle(
-                            fontSize: 20.0,
-                          ),
+                          Text(
+                            "No Internet Connection!",
+                            style: TextStyle(
+                              fontSize: 20.0,
+                            ),
                           ),
                         ],
                       ),
@@ -235,7 +263,6 @@ class _HomeState extends State<Home> {
                   top: MediaQuery.of(context).size.height / 2.0,
                 ),
                 child: Column(
-
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
