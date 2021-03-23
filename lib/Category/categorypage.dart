@@ -207,7 +207,33 @@ class _CategoryPageState extends State<CategoryPage> {
                     ),
                   );
                 } else if (snapshot.hasError) {
-                  return Text("${snapshot.error}");
+                  return Container(
+                    height: MediaQuery.of(context).size.height,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.wifi_off_rounded,
+                              size: 80.0,
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("No Internet Connection!",
+                              style: TextStyle(
+                                fontSize: 20.0,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  );
                 }
                 return Container(
                   margin: EdgeInsets.only(
@@ -222,6 +248,7 @@ class _CategoryPageState extends State<CategoryPage> {
                             "Elite High School...",
                             style: TextStyle(
                               fontSize: 20.0,
+                              color: Color(0xff3385e8),
                             ),
                           ),
                         ],
@@ -251,6 +278,14 @@ class _CategoryPageState extends State<CategoryPage> {
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(40.0),
           topRight: Radius.circular(40.0),
+        ),
+        image: DecorationImage(
+          image: AssetImage("assets/ehsLogo.png"),
+          fit: BoxFit.fitWidth,
+          colorFilter: ColorFilter.mode(
+            Color(0xfff2f3f5).withOpacity(0.05),
+            BlendMode.dstATop,
+          ),
         ),
       ),
       child: allCoursesList(),

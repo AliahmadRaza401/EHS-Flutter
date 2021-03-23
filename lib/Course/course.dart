@@ -292,7 +292,33 @@ class _CoursePageState extends State<CoursePage> {
               }
             }
           } else if (snapshot.hasError) {
-            return Text("${snapshot.error}");
+            return Container(
+              height: MediaQuery.of(context).size.height,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.wifi_off_rounded,
+                        size: 80.0,
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("No Internet Connection!",
+                        style: TextStyle(
+                          fontSize: 20.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            );
           }
           return Container(
             margin: EdgeInsets.only(
@@ -307,6 +333,7 @@ class _CoursePageState extends State<CoursePage> {
                       "Elite High School...",
                       style: TextStyle(
                         fontSize: 20.0,
+                        color: Color(0xff3395e8),
                       ),
                     ),
                   ],

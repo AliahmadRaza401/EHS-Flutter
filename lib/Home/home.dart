@@ -72,7 +72,10 @@ class _HomeState extends State<Home> {
             image: DecorationImage(
               image: AssetImage("assets/ehsLogo.png"),
               fit: BoxFit.fitWidth,
-              colorFilter: ColorFilter.mode(Color(0xfff2f3f5).withOpacity(0.05), BlendMode.dstATop),
+              colorFilter: ColorFilter.mode(
+                Color(0xfff2f3f5).withOpacity(0.05),
+                BlendMode.dstATop,
+              ),
             ),
           ),
           child: FutureBuilder(
@@ -198,7 +201,33 @@ class _HomeState extends State<Home> {
                   ],
                 );
               } else if (snapshot.hasError) {
-                return Text("${snapshot.error}");
+                return Container(
+                  height: MediaQuery.of(context).size.height,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.wifi_off_rounded,
+                            size: 80.0,
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("No Internet Connection!",
+                          style: TextStyle(
+                            fontSize: 20.0,
+                          ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                );
               }
 
               return Container(
@@ -206,6 +235,7 @@ class _HomeState extends State<Home> {
                   top: MediaQuery.of(context).size.height / 2.0,
                 ),
                 child: Column(
+
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -213,7 +243,8 @@ class _HomeState extends State<Home> {
                         JumpingText(
                           "Elite High School...",
                           style: TextStyle(
-                            fontSize: 20.0,
+                            fontSize: 22.0,
+                            color: Color(0xff3384e8),
                           ),
                         ),
                       ],
