@@ -33,78 +33,40 @@ class _SupportState extends State<Support> {
   //card
   Widget supportCards() {
     return Container(
-      height: 220.0,
-      margin: EdgeInsets.only(top: 40.0),
-      child: Align(
-        alignment: Alignment.center,
-        child: Container(
-          width: MediaQuery.of(context).size.width * .9,
-          child: Column(
-            children: <Widget>[
-              Container(
-                height: 90.0,
-                padding: EdgeInsets.all(10.0),
-                child: Card(
-                  elevation: 4,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.0),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.all(2.0),
-                    child: ListTile(
-                      leading: Icon(
-                        Icons.chat_outlined,
-                        color: Color(0xff3385e8),
-                        size: 44.0,
-                      ),
-                      title: Text(
-                        "Contact Live Chat",
-                        style: TextStyle(
-                          color: Color(0xff3385e8),
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      trailing: Icon(
-                        Icons.navigate_next_rounded,
-                        color: Color(0xff3385e8),
-                        size: 44.0,
-                      ),
-                    ),
-                  ),
+      margin: EdgeInsets.only(
+        top: 50.0,
+        bottom: 30.0,
+      ),
+      width: MediaQuery.of(context).size.width * .9,
+      child: Container(
+        height: 90.0,
+        padding: EdgeInsets.all(10.0),
+        child: Card(
+          elevation: 4,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12.0),
+          ),
+          child: Padding(
+            padding: EdgeInsets.all(2.0),
+            child: ListTile(
+              leading: Icon(
+                Icons.chat_outlined,
+                color: Color(0xff3385e8),
+                size: 44.0,
+              ),
+              title: Text(
+                "Contact Live Chat",
+                style: TextStyle(
+                  color: Color(0xff3385e8),
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              Container(
-                height: 90.0,
-                padding: EdgeInsets.all(10.0),
-                child: Card(
-                  elevation: 4,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.0),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.all(2.0),
-                    child: ListTile(
-                      leading: Icon(
-                        Icons.call_rounded,
-                        color: Colors.black54,
-                        size: 44.0,
-                      ),
-                      title: Text(
-                        "Contact Live Call",
-                        style: TextStyle(
-                          color: Colors.black,
-                        ),
-                      ),
-                      trailing: Icon(
-                        Icons.navigate_next_rounded,
-                        color: Colors.black54,
-                        size: 44.0,
-                      ),
-                    ),
-                  ),
-                ),
+              trailing: Icon(
+                Icons.navigate_next_rounded,
+                color: Color(0xff3385e8),
+                size: 44.0,
               ),
-            ],
+            ),
           ),
         ),
       ),

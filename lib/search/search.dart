@@ -63,7 +63,7 @@ class _SearchPageState extends State<SearchPage> {
           height: height(),
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/allCourses.jpg'),
+              image: AssetImage('assets/search.jpg'),
               fit: BoxFit.fill,
             ),
           ),
@@ -149,7 +149,12 @@ class _SearchPageState extends State<SearchPage> {
                       child: ListView.builder(
                         itemCount: snapshot.data.length,
                         itemBuilder: (context, i) {
-                          if (snapshot.data[i]['course_name'].toString().toLowerCase().contains(widget.queryResults.toLowerCase())) {
+                          if (widget.queryResults.isEmpty) {
+                            return SizedBox(
+                              height: 0.0,
+                            );
+                          }
+                          else if (snapshot.data[i]['course_name'].toString().toLowerCase().contains(widget.queryResults.toLowerCase())) {
                             return allCourseCard(
                               snapshot.data[i]['course_name'],
                               snapshot.data[i]['course_credit_value'],

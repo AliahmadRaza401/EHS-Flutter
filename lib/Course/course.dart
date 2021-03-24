@@ -1,5 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:ehs/Api/apidata.dart';
+import 'package:ehs/Video/coursevideo.dart';
+import 'package:ehs/animations/scaleanimation.dart';
+import 'package:ehs/webview/webView.dart';
 import 'package:flutter/material.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 
@@ -162,7 +165,16 @@ class _CoursePageState extends State<CoursePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ElevatedButton.icon(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (BuildContext context) => MyWebView(
+                            url:
+                                "https://www.youtube.com/watch?v=a18py61_F_w&ab_channel=CokeStudio",
+                          ),
+                        ),
+                      );
+                    },
                     style: ButtonStyle(
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
@@ -184,7 +196,14 @@ class _CoursePageState extends State<CoursePage> {
                     ),
                   ),
                   ElevatedButton.icon(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        ScaleRoute(
+                          page: VideoPage(),
+                        ),
+                      );
+                    },
                     style: ButtonStyle(
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
