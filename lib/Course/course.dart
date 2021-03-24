@@ -322,6 +322,16 @@ class _CoursePageState extends State<CoursePage> {
             );
           }
           return Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/ehsLogo.png"),
+                fit: BoxFit.fitWidth,
+                colorFilter: ColorFilter.mode(
+                  Color(0xfff2f3f5).withOpacity(0.05),
+                  BlendMode.dstATop,
+                ),
+              ),
+            ),
             margin: EdgeInsets.only(
               top: MediaQuery.of(context).size.height / 2.0,
             ),
