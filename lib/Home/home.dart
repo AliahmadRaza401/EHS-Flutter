@@ -10,7 +10,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 
-final searchquery = TextEditingController();
+final searchQuery = TextEditingController();
 
 class Home extends StatefulWidget {
   @override
@@ -21,12 +21,12 @@ class _HomeState extends State<Home> {
   // ignore: top_level_instance_method
   final data = ApiData().fetchCourses();
 
-  //searchbar widget
+  //searchBar widget
   Widget searchBar() {
     return TextFormField(
       initialValue: null,
       autocorrect: true,
-      controller: searchquery,
+      controller: searchQuery,
       validator: (query) {
         if (query.isEmpty) {
           return 'Enter Search Query';
@@ -76,7 +76,7 @@ class _HomeState extends State<Home> {
                 context,
                 SlideBottomRoute(
                   page: SearchPage(
-                    queryResults: searchquery.text,
+                    queryResults: searchQuery.text,
                   ),
                 ),
               );
