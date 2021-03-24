@@ -26,6 +26,8 @@ dependencies:
   curved_navigation_bar: ^0.3.7
   http: any
   progress_indicators: any
+  chewie: any
+  video_player: any
   flutter:
     sdk: flutter
 
