@@ -18,6 +18,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  // ignore: top_level_instance_method
   final data = ApiData().fetchCourses();
 
   //searchbar widget

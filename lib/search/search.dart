@@ -1,10 +1,10 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:ehs/Api/apidata.dart';
 import 'package:ehs/Course/course.dart';
 import 'package:ehs/animations/scaleanimation.dart';
 import 'package:flutter/material.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 
+// ignore: must_be_immutable
 class SearchPage extends StatefulWidget {
   String queryResults;
 
@@ -14,6 +14,7 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+  // ignore: top_level_instance_method
   final data = ApiData().fetchCourses();
 
   //responsive height
@@ -160,7 +161,6 @@ class _SearchPageState extends State<SearchPage> {
                               height: 0.0,
                             );
                           }
-                          return null;
                         },
                       ),
                     ),

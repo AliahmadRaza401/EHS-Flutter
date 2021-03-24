@@ -3,6 +3,7 @@ import 'package:ehs/Api/apidata.dart';
 import 'package:flutter/material.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 
+// ignore: must_be_immutable
 class CoursePage extends StatefulWidget {
   String courseName, courseImage;
 
@@ -13,6 +14,7 @@ class CoursePage extends StatefulWidget {
 }
 
 class _CoursePageState extends State<CoursePage> {
+  // ignore: top_level_instance_method
   final data = ApiData().fetchCourses();
 
   //responsive height

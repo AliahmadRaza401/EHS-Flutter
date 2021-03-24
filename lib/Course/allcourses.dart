@@ -12,6 +12,7 @@ class AllCourses extends StatefulWidget {
 }
 
 class _AllCoursesState extends State<AllCourses> {
+  // ignore: top_level_instance_method
   final data = ApiData().fetchCourses();
 
   //responsive height

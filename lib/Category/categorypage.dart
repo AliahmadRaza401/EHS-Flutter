@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 
+// ignore: must_be_immutable
 class CategoryPage extends StatefulWidget {
   String name, image;
 
@@ -16,6 +17,7 @@ class CategoryPage extends StatefulWidget {
 }
 
 class _CategoryPageState extends State<CategoryPage> {
+  // ignore: top_level_instance_method
   final data = ApiData().fetchCourses();
 
   //responsive height

@@ -6,6 +6,7 @@ import 'package:ehs/animations/scaleanimation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class TopCourses extends StatefulWidget {
   String title;
   String image;
