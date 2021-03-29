@@ -219,8 +219,8 @@ class _HomeState extends State<Home> {
                               top: 25.0,
                             ),
                             child: TopCourses(
-                              title: snapshot.data[5]["course_name"],
-                              image: snapshot.data[5]["course_image"],
+                              title: snapshot.data[4]["course_name"],
+                              image: snapshot.data[4]["course_image"],
                             ),
                           ),
                         ],

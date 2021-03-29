@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:ehs/Api/apidata.dart';
-import 'package:ehs/Video/coursevideo.dart';
+import 'package:ehs/Video/chew_player.dart';
 import 'package:ehs/animations/scaleanimation.dart';
 import 'package:ehs/webview/webView.dart';
 import 'package:flutter/material.dart';
@@ -200,7 +200,10 @@ class _CoursePageState extends State<CoursePage> {
                       Navigator.push(
                         context,
                         ScaleRoute(
-                          page: VideoPage(),
+                          page: ChewieListItem(
+                            videoUrl:
+                                'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
+                          ),
                         ),
                       );
                     },
