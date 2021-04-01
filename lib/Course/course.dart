@@ -170,7 +170,7 @@ class _CoursePageState extends State<CoursePage> {
                         MaterialPageRoute(
                           builder: (BuildContext context) => MyWebView(
                             url:
-                                "https://www.youtube.com/watch?v=a18py61_F_w&ab_channel=CokeStudio",
+                                "http://admissionselitehighschool.com/",
                           ),
                         ),
                       );

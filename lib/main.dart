@@ -1,9 +1,7 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:ehs/Support%20Pages/support.dart';
+import 'package:ehs/Home/bottomnavigation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'Home/home.dart';
+import 'package:splashscreen/splashscreen.dart';
 
 void main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -20,58 +18,28 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  int currentPage = 0;
-  GlobalKey _bottomNavigationKey = GlobalKey();
+  dynamic photoSize() {
+    if (MediaQuery.of(context).orientation == Orientation.portrait) {
+      return MediaQuery.of(context).size.width * .8;
+    } else {
+      return MediaQuery.of(context).size.width * .3;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xfff2f3f5),
-      body: Container(
-        child: Center(
-          child: _getPage(currentPage),
+    return Container(
+      height: MediaQuery.of(context).size.height,
+      child: SplashScreen(
+        seconds: 3,
+        backgroundColor: Color(0xfff2f3f5),
+        navigateAfterSeconds: BottomNav(),
+        image: new Image.asset(
+          'assets/ehsLogo.png',
         ),
-      ),
-      bottomNavigationBar: CurvedNavigationBar(
-        key: _bottomNavigationKey,
-        height: 52.0,
-        backgroundColor: Colors.transparent,
-        index: 0,
-        animationDuration: Duration(milliseconds: 300),
-        items: [
-          Icon(
-            Icons.home_rounded,
-            size: 30,
-            color: Color(0xff3385e8),
-          ),
-          Icon(
-            Icons.support_agent_rounded,
-            size: 30,
-            color: Color(0xff3385e8),
-          ),
-        ],
-        onTap: (index) {
-          setState(() {
-            currentPage = index;
-          });
-        },
+        photoSize: photoSize(),
+        useLoader: false,
       ),
     );
-  }
-
-  _getPage(int page) {
-    switch (page) {
-      case 0:
-        return Home();
-      case 1:
-        return Support();
-      default:
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Text("Tabbar Index Error"),
-          ],
-        );
-    }
   }
 }
