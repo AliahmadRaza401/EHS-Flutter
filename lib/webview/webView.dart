@@ -30,12 +30,15 @@ class _MyWebViewState extends State<MyWebView> {
     return Scaffold(
       body: Stack(
         children: [
-          WebView(
-            initialUrl: widget.url,
-            javascriptMode: JavascriptMode.unrestricted,
-            onWebViewCreated: (WebViewController webViewController) {
-              _controller.complete(webViewController);
-            },
+          Padding(
+            padding: const EdgeInsets.only(top: 30),
+            child: WebView(
+              initialUrl: widget.url,
+              javascriptMode: JavascriptMode.unrestricted,
+              onWebViewCreated: (WebViewController webViewController) {
+                _controller.complete(webViewController);
+              },
+            ),
           ),
           Container(
             height: appBarHeight(),
