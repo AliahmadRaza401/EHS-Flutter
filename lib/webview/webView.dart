@@ -31,7 +31,7 @@ class _MyWebViewState extends State<MyWebView> {
       body: Stack(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 30),
+            padding: EdgeInsets.only(top: appBarHeight()),
             child: WebView(
               initialUrl: widget.url,
               javascriptMode: JavascriptMode.unrestricted,
@@ -52,7 +52,7 @@ class _MyWebViewState extends State<MyWebView> {
                 ),
               ),
               centerTitle: true,
-              backgroundColor: Color(0xfff2f3f5).withOpacity(.3),
+              backgroundColor: Color(0xfff2f2f2).withOpacity(.3),
               elevation: 2.0,
             ),
           ),

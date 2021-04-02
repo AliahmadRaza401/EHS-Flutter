@@ -7,7 +7,7 @@ void main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'EHS',
       theme: ThemeData(
-        primaryColor: Color(0xff3385e8),
+        primaryColor: Color(0xff007bff),
       ),
       home: MainPage(),
     ));
@@ -32,7 +32,7 @@ class _MainPageState extends State<MainPage> {
       height: MediaQuery.of(context).size.height,
       child: SplashScreen(
         seconds: 3,
-        backgroundColor: Color(0xfff2f3f5),
+        backgroundColor: Color(0xfff2f2f2),
         navigateAfterSeconds: BottomNav(),
         image: new Image.asset(
           'assets/ehsLogo.png',

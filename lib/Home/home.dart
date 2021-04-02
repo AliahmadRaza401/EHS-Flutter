@@ -50,7 +50,7 @@ class _HomeState extends State<Home> {
           fontSize: 15.0,
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Color(0xff3385e8), width: 2.0),
+          borderSide: BorderSide(color: Color(0xff007bff), width: 2.0),
           borderRadius: BorderRadius.circular(12.0),
         ),
         enabledBorder: OutlineInputBorder(
@@ -60,12 +60,12 @@ class _HomeState extends State<Home> {
         border: InputBorder.none,
         hintText: 'Search your course..',
         hintStyle: TextStyle(
-          color: Color(0xff3385e8),
+          color: Color(0xff007bff),
           fontSize: 16.0,
         ),
         suffixIcon: Container(
           decoration: BoxDecoration(
-              color: Color(0xff3385e8),
+              color: Color(0xff007bff),
               borderRadius: BorderRadius.only(
                 bottomRight: Radius.circular(12),
                 topRight: Radius.circular(12),
@@ -93,7 +93,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xfff2f3f5),
+      backgroundColor: Color(0xfff2f2f2),
       body: SingleChildScrollView(
         child: Container(
           decoration: BoxDecoration(
@@ -101,7 +101,7 @@ class _HomeState extends State<Home> {
               image: AssetImage("assets/ehsLogo.png"),
               fit: BoxFit.fitWidth,
               colorFilter: ColorFilter.mode(
-                Color(0xfff2f3f5).withOpacity(0.05),
+                Color(0xfff2f2f2).withOpacity(0.05),
                 BlendMode.dstATop,
               ),
             ),
@@ -167,8 +167,8 @@ class _HomeState extends State<Home> {
                             child: Text(
                               "See All",
                               style: TextStyle(
-                                color: Color(0xff3385e8),
-                                fontSize: 14.0,
+                                color: Color(0xff007bff),
+                                fontSize: 16.0,
                               ),
                             ),
                           ),
@@ -219,8 +219,8 @@ class _HomeState extends State<Home> {
                               top: 25.0,
                             ),
                             child: TopCourses(
-                              title: snapshot.data[4]["course_name"],
-                              image: snapshot.data[4]["course_image"],
+                              title: snapshot.data[5]["course_name"],
+                              image: snapshot.data[5]["course_image"],
                             ),
                           ),
                         ],
@@ -230,7 +230,7 @@ class _HomeState extends State<Home> {
                 );
               } else if (snapshot.hasError) {
                 return Container(
-                  height: MediaQuery.of(context).size.height,
+                  height: MediaQuery.of(context).size.height * .9,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -260,10 +260,12 @@ class _HomeState extends State<Home> {
               }
 
               return Container(
-                margin: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height / 2.0,
-                ),
+                // margin: EdgeInsets.only(
+                //   top: MediaQuery.of(context).size.height / 1.0,
+                // ),
+                height: MediaQuery.of(context).size.height * .9,
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,

@@ -86,7 +86,7 @@ class _AllCoursesState extends State<AllCourses> {
               ),
             ),
             centerTitle: true,
-            backgroundColor: Color(0xfff2f3f5).withOpacity(.3),
+            backgroundColor: Color(0xfff2f2f2).withOpacity(.3),
             elevation: 2.0,
           ),
         ),
@@ -204,7 +204,7 @@ class _AllCoursesState extends State<AllCourses> {
                         "Elite High School...",
                         style: TextStyle(
                           fontSize: 20.0,
-                          color: Color(0xff3385e8),
+                          color: Color(0xff007bff),
                         ),
                       ),
                     ],
@@ -228,7 +228,7 @@ class _AllCoursesState extends State<AllCourses> {
       width: MediaQuery.of(context).size.width,
       height: bodyContainerHeight(),
       decoration: BoxDecoration(
-        color: Color(0xfff2f3f5),
+        color: Color(0xfff2f2f2),
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(40.0),
           topRight: Radius.circular(40.0),
@@ -237,7 +237,7 @@ class _AllCoursesState extends State<AllCourses> {
           image: AssetImage("assets/ehsLogo.png"),
           fit: BoxFit.fitWidth,
           colorFilter: ColorFilter.mode(
-            Color(0xfff2f3f5).withOpacity(0.05),
+            Color(0xfff2f2f2).withOpacity(0.05),
             BlendMode.dstATop,
           ),
         ),
@@ -249,7 +249,7 @@ class _AllCoursesState extends State<AllCourses> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xfff2f3f5),
+      backgroundColor: Color(0xfff2f2f2),
       body: Stack(
         children: [
           categoryImage(),

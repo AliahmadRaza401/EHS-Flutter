@@ -16,7 +16,7 @@ class _BottomNavState extends State<BottomNav> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xfff2f3f5),
+      backgroundColor: Color(0xfff2f2f2),
       body: Container(
         child: Center(
           child: _getPage(currentPage),
@@ -32,12 +32,12 @@ class _BottomNavState extends State<BottomNav> {
           Icon(
             Icons.home_rounded,
             size: 30,
-            color: Color(0xff3385e8),
+            color: Color(0xff007bff),
           ),
           Icon(
             Icons.support_agent_rounded,
             size: 30,
-            color: Color(0xff3385e8),
+            color: Color(0xff007bff),
           ),
         ],
         onTap: (index) {

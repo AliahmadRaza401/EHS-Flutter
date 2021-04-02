@@ -20,7 +20,7 @@ class _SupportState extends State<Support> {
           ),
           fit: BoxFit.fill,
         ),
-        color: Color(0xff3385e8),
+        color: Color(0xff007bff),
         borderRadius: BorderRadius.only(
           bottomRight: Radius.circular(30),
           bottomLeft: Radius.circular(30),
@@ -51,19 +51,19 @@ class _SupportState extends State<Support> {
             child: ListTile(
               leading: Icon(
                 Icons.chat_outlined,
-                color: Color(0xff3385e8),
+                color: Color(0xff007bff),
                 size: 44.0,
               ),
               title: Text(
                 "Contact Live Chat",
                 style: TextStyle(
-                  color: Color(0xff3385e8),
+                  color: Color(0xff007bff),
                   fontWeight: FontWeight.bold,
                 ),
               ),
               trailing: Icon(
                 Icons.navigate_next_rounded,
-                color: Color(0xff3385e8),
+                color: Color(0xff007bff),
                 size: 44.0,
               ),
             ),
@@ -76,7 +76,7 @@ class _SupportState extends State<Support> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xfff2f3f5),
+      backgroundColor: Color(0xfff2f2f2),
       appBar: AppBar(
         title: AutoSizeText(
           'Reach Our Support Team',
@@ -87,7 +87,7 @@ class _SupportState extends State<Support> {
           ),
         ),
         centerTitle: true,
-        backgroundColor: Color(0xfff2f3f5),
+        backgroundColor: Color(0xfff2f2f2),
         elevation: 2.0,
       ),
       body: SingleChildScrollView(
@@ -101,7 +101,7 @@ class _SupportState extends State<Support> {
               child: Text(
                 "How Can We Help You?",
                 style: TextStyle(
-                  color: Color(0xff3385e8),
+                  color: Color(0xff007bff),
                   fontSize: 22.0,
                   fontWeight: FontWeight.bold,
                 ),
@@ -115,17 +115,17 @@ class _SupportState extends State<Support> {
                   width: 54.0,
                   height: 54.0,
                   decoration: BoxDecoration(
-                    // color: Color(0xff3385e8),
+                    // color: Color(0xff007bff),
                     borderRadius: BorderRadius.circular(50.0),
                     // border: Border.all(
-                    //   color: Color(0xff3385e8),
+                    //   color: Color(0xff007bff),
                     //   width: 2.0,
                     // ),
                   ),
                   child: Icon(
                     Icons.email_outlined,
                     size: 34.0,
-                    color: Color(0xff3385e8),
+                    color: Color(0xff007bff),
                   ),
                 ),
               ],
@@ -150,7 +150,7 @@ class _SupportState extends State<Support> {
                   Text(
                     "info@elitehighschool.com",
                     style: TextStyle(
-                      color: Color(0xff3385e8),
+                      color: Color(0xff007bff),
                       fontSize: 18.0,
                     ),
                   ),

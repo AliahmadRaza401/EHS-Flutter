@@ -53,7 +53,7 @@ class _ChewieListItemState extends State<ChewieListItem> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xfff2f3f5),
+      backgroundColor: Color(0xfff2f2f2),
       body: Stack(
         children: [
           Padding(
@@ -74,7 +74,7 @@ class _ChewieListItemState extends State<ChewieListItem> {
                 ),
               ),
               centerTitle: true,
-              backgroundColor: Color(0xfff2f3f5).withOpacity(.3),
+              backgroundColor: Color(0xfff2f2f2).withOpacity(.3),
               elevation: 2.0,
             ),
           ),
