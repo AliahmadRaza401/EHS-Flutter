@@ -63,7 +63,6 @@ class _TopCoursesState extends State<TopCourses> {
           alignment: Alignment.center,
           child: AutoSizeText(
             '${widget.title}',
-
             maxLines: 2,
             textAlign: TextAlign.center,
             style: TextStyle(

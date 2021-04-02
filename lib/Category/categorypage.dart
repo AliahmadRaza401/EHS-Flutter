@@ -168,8 +168,7 @@ class _CategoryPageState extends State<CategoryPage> {
                               snapshot.data[i]['course_credit_value'],
                               snapshot.data[i]['course_image'],
                             );
-                          }
-                          else{
+                          } else {
                             return SizedBox(
                               height: 0.0,
                             );

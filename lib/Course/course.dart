@@ -318,6 +318,16 @@ class _CoursePageState extends State<CoursePage> {
           } else if (snapshot.hasError) {
             return Container(
               height: MediaQuery.of(context).size.height,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/ehsLogo.png"),
+                  fit: BoxFit.fitWidth,
+                  colorFilter: ColorFilter.mode(
+                    Color(0xfff2f2f2).withOpacity(0.05),
+                    BlendMode.dstATop,
+                  ),
+                ),
+              ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -356,10 +366,9 @@ class _CoursePageState extends State<CoursePage> {
                 ),
               ),
             ),
-            margin: EdgeInsets.only(
-              top: MediaQuery.of(context).size.height / 2.0,
-            ),
+            height: MediaQuery.of(context).size.height,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
