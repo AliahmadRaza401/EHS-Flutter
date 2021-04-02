@@ -105,13 +105,16 @@ class _CoursePageState extends State<CoursePage> {
     String courseCode,
     String courseCr,
     String courseDesc,
+    String courseGrade,
+    String coursePreReq,
+    String courseDeveloper,
+    String courseDevelopDate,
+    String courseDepartment,
+    String courseStatus,
   ) {
     return Container(
       margin: EdgeInsets.only(top: bodyHeight()),
-      padding: EdgeInsets.only(
-        top: 50.0,
-        bottom: 30.0,
-      ),
+      padding: EdgeInsets.only(top: 20.0),
       width: MediaQuery.of(context).size.width,
       height: bodyContainerHeight(),
       decoration: BoxDecoration(
@@ -139,96 +142,190 @@ class _CoursePageState extends State<CoursePage> {
                 ],
               ),
               Padding(
-                padding: EdgeInsets.only(
-                  top: 20.0,
-                  bottom: 20.0,
-                ),
+                padding: EdgeInsets.only(top: 30.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    AutoSizeText(
-                      courseType,
+                    Text(
+                      "Details",
                       style: TextStyle(
-                        fontSize: 16.0,
-                      ),
-                    ),
-                    AutoSizeText(
-                      'Cr. Hr : $courseCr',
-                      style: TextStyle(
-                        fontSize: 16.0,
+                        fontSize: 20.0,
                       ),
                     ),
                   ],
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ElevatedButton.icon(
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (BuildContext context) => MyWebView(
-                            url:
-                                "https://www.admissionselitehighschool.com/login",
+              Container(
+                width: MediaQuery.of(context).size.width,
+                margin: EdgeInsets.only(top: 10.0),
+                padding: EdgeInsets.all(20.0),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10.0),
+                      child: Row(
+                        children: [
+                          AutoSizeText(
+                            'Grade : ',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                      );
-                    },
-                    style: ButtonStyle(
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6.0),
-                      )),
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                        Color(0xff007bff),
-                      ),
-                    ),
-                    icon: Icon(
-                      Icons.add_shopping_cart_rounded,
-                    ),
-                    label: Text(
-                      "Buy Now",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16.0,
-                      ),
-                    ),
-                  ),
-                  ElevatedButton.icon(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        ScaleRoute(
-                          page: ChewieListItem(
-                            videoUrl:
-                                'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
+                          AutoSizeText(
+                            '$courseGrade',
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
                           ),
-                        ),
-                      );
-                    },
-                    style: ButtonStyle(
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6.0),
-                      )),
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                        Color(0xff007bff),
+                        ],
                       ),
                     ),
-                    icon: Icon(
-                      Icons.play_arrow_rounded,
-                      size: 30.0,
-                    ),
-                    label: Text(
-                      "Preview",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16.0,
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10.0),
+                      child: Row(
+                        children: [
+                          AutoSizeText(
+                            'Prerequisites : ',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          AutoSizeText(
+                            '$coursePreReq',
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ),
-                ],
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10.0),
+                      child: Row(
+                        children: [
+                          AutoSizeText(
+                            'Type : ',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          AutoSizeText(
+                            '$courseType',
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10.0),
+                      child: Row(
+                        children: [
+                          AutoSizeText(
+                            'Credit Value : ',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          AutoSizeText(
+                            '$courseCr',
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10.0),
+                      child: Row(
+                        children: [
+                          AutoSizeText(
+                            'Developer : ',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          AutoSizeText(
+                            '$courseDeveloper',
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10.0),
+                      child: Row(
+                        children: [
+                          AutoSizeText(
+                            'Develop Date : ',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          AutoSizeText(
+                            '$courseDevelopDate',
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10.0),
+                      child: Row(
+                        children: [
+                          AutoSizeText(
+                            'Department : ',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          AutoSizeText(
+                            '$courseDepartment',
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10.0),
+                      child: Row(
+                        children: [
+                          AutoSizeText(
+                            'Status : ',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          AutoSizeText(
+                            courseStatus == '1' ? 'Active' : 'Not Active',
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
               Padding(
                 padding: EdgeInsets.only(top: 30.0),
@@ -259,31 +356,77 @@ class _CoursePageState extends State<CoursePage> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 30.0),
+                padding: EdgeInsets.symmetric(vertical: 20.0),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Text(
-                      "Prerequisites",
-                      style: TextStyle(
-                        fontSize: 20.0,
+                    ElevatedButton.icon(
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (BuildContext context) => MyWebView(
+                              url:
+                                  "https://www.admissionselitehighschool.com/login",
+                            ),
+                          ),
+                        );
+                      },
+                      style: ButtonStyle(
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6.0),
+                        )),
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                          Color(0xff007bff),
+                        ),
+                      ),
+                      icon: Icon(
+                        Icons.how_to_reg_rounded,
+                      ),
+                      label: Text(
+                        "Register",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16.0,
+                        ),
+                      ),
+                    ),
+                    ElevatedButton.icon(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          ScaleRoute(
+                            page: ChewieListItem(
+                              videoUrl:
+                                  'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
+                            ),
+                          ),
+                        );
+                      },
+                      style: ButtonStyle(
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6.0),
+                        )),
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                          Color(0xff007bff),
+                        ),
+                      ),
+                      icon: Icon(
+                        Icons.play_arrow_rounded,
+                        size: 30.0,
+                      ),
+                      label: Text(
+                        "Preview",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16.0,
+                        ),
                       ),
                     ),
                   ],
-                ),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                margin: EdgeInsets.only(top: 10.0),
-                padding: EdgeInsets.all(20.0),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
-                child: AutoSizeText(
-                  courseDesc,
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),
                 ),
               ),
             ],
@@ -310,6 +453,12 @@ class _CoursePageState extends State<CoursePage> {
                       snapshot.data[i]["course_code"],
                       snapshot.data[i]["course_credit_value"],
                       snapshot.data[i]["course_description"],
+                      snapshot.data[i]["grade_id"],
+                      snapshot.data[i]["course_description"],
+                      snapshot.data[i]["course_developer"],
+                      snapshot.data[i]["course_develop_date"],
+                      snapshot.data[i]["course_department"],
+                      snapshot.data[i]["course_status"],
                     ),
                   ],
                 );
