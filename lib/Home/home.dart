@@ -83,7 +83,6 @@ class _HomeState extends State<Home> {
             },
             icon: Icon(Icons.search),
             color: Colors.white,
-            // disabledColor: Colors.white,
           ),
         ),
       ),
@@ -106,183 +105,220 @@ class _HomeState extends State<Home> {
               ),
             ),
           ),
-          child: FutureBuilder(
-            future: data,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return Column(
+          child: Column(
+            children: [
+              //slider
+              SliderHome(),
+
+              //search bar
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 30.0,
+                  vertical: 20.0,
+                ),
+                child: searchBar(),
+              ),
+
+              //category heading
+              Padding(
+                padding: EdgeInsets.fromLTRB(20.0, 30.0, 20.0, 6.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    //slider
-                    SliderHome(),
-
-                    //search bar
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 30.0,
-                        vertical: 20.0,
+                    Text(
+                      "Categories",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24.0,
                       ),
-                      child: searchBar(),
-                    ),
-
-                    //category heading
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(20.0, 30.0, 20.0, 6.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Categories",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 24.0,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-
-                    //category list
-                    CourseCategory(),
-
-                    //Top courses heading
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 10.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          AutoSizeText(
-                            "Top Courses",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 24.0,
-                            ),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                SlideBottomRoute(page: AllCourses()),
-                              );
-                            },
-                            child: Text(
-                              "See All",
-                              style: TextStyle(
-                                color: Color(0xff007bff),
-                                fontSize: 16.0,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-
-                    Padding(
-                      padding: EdgeInsets.only(bottom: 50.0),
-                      child: Wrap(
-                        direction: Axis.horizontal,
-                        alignment: WrapAlignment.start,
-                        runSpacing: 20.0,
-                        spacing: 20.0,
-                        children: [
-                          TopCourses(
-                            title: snapshot.data[0]["course_name"],
-                            image: snapshot.data[0]["course_image"],
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              top: 25.0,
-                            ),
-                            child: TopCourses(
-                              title: snapshot.data[1]["course_name"],
-                              image: snapshot.data[1]["course_image"],
-                            ),
-                          ),
-                          TopCourses(
-                            title: snapshot.data[2]["course_name"],
-                            image: snapshot.data[2]["course_image"],
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              top: 25.0,
-                            ),
-                            child: TopCourses(
-                              title: snapshot.data[3]["course_name"],
-                              image: snapshot.data[3]["course_image"],
-                            ),
-                          ),
-                          TopCourses(
-                            title: snapshot.data[4]["course_name"],
-                            image: snapshot.data[4]["course_image"],
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              top: 25.0,
-                            ),
-                            child: TopCourses(
-                              title: snapshot.data[5]["course_name"],
-                              image: snapshot.data[5]["course_image"],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                );
-              } else if (snapshot.hasError) {
-                return Container(
-                  height: MediaQuery.of(context).size.height * .9,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.wifi_off_rounded,
-                            size: 80.0,
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "No Internet Connection!",
-                            style: TextStyle(
-                              fontSize: 20.0,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                );
-              }
-
-              return Container(
-                // margin: EdgeInsets.only(
-                //   top: MediaQuery.of(context).size.height / 1.0,
-                // ),
-                height: MediaQuery.of(context).size.height * .9,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        JumpingText(
-                          "Elite High School...",
-                          style: TextStyle(
-                            fontSize: 22.0,
-                            color: Color(0xff3384e8),
-                          ),
-                        ),
-                      ],
                     ),
                   ],
                 ),
-              );
-            },
+              ),
+
+              //category list
+              CourseCategory(),
+
+              //Top courses heading
+              Padding(
+                padding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    AutoSizeText(
+                      "Top Courses",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24.0,
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          SlideBottomRoute(page: AllCourses()),
+                        );
+                      },
+                      child: Text(
+                        "See All",
+                        style: TextStyle(
+                          color: Color(0xff007bff),
+                          fontSize: 16.0,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              FutureBuilder(
+                future: data,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    if (snapshot.data.length >= 6) {
+                      return Padding(
+                        padding: EdgeInsets.only(bottom: 50.0),
+                        child: Wrap(
+                          direction: Axis.horizontal,
+                          alignment: WrapAlignment.start,
+                          runSpacing: 20.0,
+                          spacing: 20.0,
+                          children: [
+                            TopCourses(
+                              title: snapshot.data[0]["course_name"],
+                              image: snapshot.data[0]["course_image"],
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                top: 25.0,
+                              ),
+                              child: TopCourses(
+                                title: snapshot.data[1]["course_name"],
+                                image: snapshot.data[1]["course_image"],
+                              ),
+                            ),
+                            TopCourses(
+                              title: snapshot.data[2]["course_name"],
+                              image: snapshot.data[2]["course_image"],
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                top: 25.0,
+                              ),
+                              child: TopCourses(
+                                title: snapshot.data[3]["course_name"],
+                                image: snapshot.data[3]["course_image"],
+                              ),
+                            ),
+                            TopCourses(
+                              title: snapshot.data[4]["course_name"],
+                              image: snapshot.data[4]["course_image"],
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                top: 25.0,
+                              ),
+                              child: TopCourses(
+                                title: snapshot.data[5]["course_name"],
+                                image: snapshot.data[5]["course_image"],
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    } else {
+                      return Padding(
+                        padding: EdgeInsets.only(bottom: 50.0),
+                        child: Wrap(
+                          direction: Axis.horizontal,
+                          alignment: WrapAlignment.start,
+                          runSpacing: 20.0,
+                          spacing: 20.0,
+                          children: [
+                            TopCourses(
+                              title: snapshot.data[0]["course_name"],
+                              image: snapshot.data[0]["course_image"],
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                top: 25.0,
+                              ),
+                              child: TopCourses(
+                                title: snapshot.data[1]["course_name"],
+                                image: snapshot.data[1]["course_image"],
+                              ),
+                            ),
+                            TopCourses(
+                              title: snapshot.data[2]["course_name"],
+                              image: snapshot.data[2]["course_image"],
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                top: 25.0,
+                              ),
+                              child: TopCourses(
+                                title: snapshot.data[3]["course_name"],
+                                image: snapshot.data[3]["course_image"],
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    }
+                  } else if (snapshot.hasError) {
+                    return Container(
+                      height: MediaQuery.of(context).size.height * .9,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.wifi_off_rounded,
+                                size: 80.0,
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "No Internet Connection!",
+                                style: TextStyle(
+                                  fontSize: 20.0,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+
+                  return Container(
+                    height: MediaQuery.of(context).size.height * .9,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            JumpingText(
+                              "Elite High School...",
+                              style: TextStyle(
+                                fontSize: 22.0,
+                                color: Color(0xff3384e8),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ],
           ),
         ),
       ),
