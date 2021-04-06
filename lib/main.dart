@@ -20,7 +20,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   dynamic photoSize() {
     if (MediaQuery.of(context).orientation == Orientation.portrait) {
-      return MediaQuery.of(context).size.width * .8;
+      return MediaQuery.of(context).size.width * .7;
     } else {
       return MediaQuery.of(context).size.width * .3;
     }
