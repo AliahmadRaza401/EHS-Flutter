@@ -34,11 +34,8 @@ class _ChewieListItemState extends State<ChewieListItem> {
         widget.videoUrl,
       ),
       aspectRatio: 16 / 9,
-      // Prepare the video to be played and display the first frame
       autoInitialize: true,
       looping: true,
-      // Errors can occur for example when trying to play a video
-      // from a non-existent URL
       errorBuilder: (context, errorMessage) {
         return Center(
           child: Text(
