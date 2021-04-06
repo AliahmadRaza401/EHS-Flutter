@@ -2,18 +2,16 @@ import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
-class ChewieListItem extends StatefulWidget {
-  // This will contain the URL/asset path which we want to play
-
+class VideoPlayer extends StatefulWidget {
   final String videoUrl;
 
-  ChewieListItem({this.videoUrl});
+  VideoPlayer({this.videoUrl});
 
   @override
-  _ChewieListItemState createState() => _ChewieListItemState();
+  _VideoPlayerState createState() => _VideoPlayerState();
 }
 
-class _ChewieListItemState extends State<ChewieListItem> {
+class _VideoPlayerState extends State<VideoPlayer> {
   ChewieController _chewieController;
 
   dynamic appBarHeight() {
@@ -35,7 +33,7 @@ class _ChewieListItemState extends State<ChewieListItem> {
       ),
       aspectRatio: 16 / 9,
       autoInitialize: true,
-      looping: true,
+      looping: false,
       errorBuilder: (context, errorMessage) {
         return Center(
           child: Text(
@@ -45,6 +43,13 @@ class _ChewieListItemState extends State<ChewieListItem> {
         );
       },
     );
+  }
+
+  @override
+  void dispose() {
+    _chewieController.pause();
+    super.dispose();
+    print("dispose");
   }
 
   @override
@@ -78,12 +83,5 @@ class _ChewieListItemState extends State<ChewieListItem> {
         ],
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    // IMPORTANT to dispose of all the used resources
-    _chewieController.dispose();
   }
 }
