@@ -1,6 +1,6 @@
+import 'package:animations/animations.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:ehs/Category/categorypage.dart';
-import 'package:ehs/animations/slideanimation.dart';
 import 'package:flutter/material.dart';
 
 class CourseCategory extends StatefulWidget {
@@ -11,66 +11,68 @@ class CourseCategory extends StatefulWidget {
 class _CourseCategoryState extends State<CourseCategory> {
   //Category card
   Widget courseCard(String title, String image) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          SlideBottomRoute(
-            page: CategoryPage(
-              name: title,
-              image: image,
-            ),
-          ),
-        );
-      },
-      child: SizedBox(
-        width: 116,
-        child: Card(
-          elevation: 4.0,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(10.0))),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  Image.asset(
-                    image,
-                    fit: BoxFit.fill,
-                    height: 74.0,
-                    width: 100.0,
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 42.0,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
+    return OpenContainer(
+        transitionDuration: Duration(milliseconds: 600),
+        closedColor: Colors.transparent,
+        closedElevation: 0.0,
+        closedBuilder: (context, openWidget) {
+          return GestureDetector(
+            onTap: openWidget,
+            child: SizedBox(
+              width: 116,
+              child: Card(
+                elevation: 4.0,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                child: Column(
                   children: [
-                    Flexible(
-                      child: Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: AutoSizeText(
-                          title,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          maxLines: 2,
+                    Row(
+                      children: [
+                        Image.asset(
+                          image,
+                          fit: BoxFit.fill,
+                          height: 74.0,
+                          width: 100.0,
                         ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 42.0,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Flexible(
+                            child: Padding(
+                              padding: const EdgeInsets.all(6.0),
+                              child: AutoSizeText(
+                                title,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                maxLines: 2,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
                 ),
+                clipBehavior: Clip.antiAlias,
+                margin: EdgeInsets.all(8.0),
               ),
-            ],
-          ),
-          clipBehavior: Clip.antiAlias,
-          margin: EdgeInsets.all(8.0),
-        ),
-      ),
-    );
+            ),
+          );
+        },
+        openBuilder: (context, closeWidget) {
+          return CategoryPage(
+            name: title,
+            image: image,
+          );
+        });
   }
 
   @override

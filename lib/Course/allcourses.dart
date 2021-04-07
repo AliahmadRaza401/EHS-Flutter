@@ -1,7 +1,7 @@
+import 'package:animations/animations.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:ehs/Api/apidata.dart';
 import 'package:ehs/Course/course.dart';
-import 'package:ehs/animations/scaleanimation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:progress_indicators/progress_indicators.dart';
@@ -97,45 +97,47 @@ class _AllCoursesState extends State<AllCourses> {
   //course card
   Widget allCourseCard(
       String cardTitle, String cardSubTitle, String cardImage) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          ScaleRoute(
-            page: CoursePage(
-              courseName: cardTitle,
-              courseImage: cardImage,
-            ),
-          ),
-        );
-      },
-      child: Container(
-        height: 100.0,
-        padding: EdgeInsets.all(10.0),
-        child: Card(
-          elevation: 4,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12.0),
-          ),
-          child: ListTile(
-            leading: ClipRRect(
-              borderRadius: BorderRadius.circular(12.0),
-              child: Image.network(
-                cardImage,
-                fit: BoxFit.fill,
+    return OpenContainer(
+        transitionDuration: Duration(milliseconds: 600),
+        closedColor: Colors.transparent,
+        closedElevation: 0.0,
+        closedBuilder: (context, openWidget) {
+          return GestureDetector(
+            onTap: openWidget,
+            child: Container(
+              height: 100.0,
+              padding: EdgeInsets.all(10.0),
+              child: Card(
+                elevation: 4,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+                child: ListTile(
+                  leading: ClipRRect(
+                    borderRadius: BorderRadius.circular(12.0),
+                    child: Image.network(
+                      cardImage,
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                  title: Text(cardTitle),
+                  subtitle: Text('Credit Hour : $cardSubTitle'),
+                  trailing: Icon(
+                    Icons.navigate_next_rounded,
+                    color: Color(0xff3385e3),
+                    size: 44.0,
+                  ),
+                ),
               ),
             ),
-            title: Text(cardTitle),
-            subtitle: Text('Credit Hour : $cardSubTitle'),
-            trailing: Icon(
-              Icons.navigate_next_rounded,
-              color: Color(0xff3385e3),
-              size: 44.0,
-            ),
-          ),
-        ),
-      ),
-    );
+          );
+        },
+        openBuilder: (context, closeWidget) {
+          return CoursePage(
+            courseName: cardTitle,
+            courseImage: cardImage,
+          );
+        });
   }
 
   //course card list

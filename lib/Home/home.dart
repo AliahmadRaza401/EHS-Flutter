@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:ehs/Api/apidata.dart';
 import 'package:ehs/Course/allcourses.dart';
@@ -21,7 +22,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   // ignore: top_level_instance_method
   final data = ApiData().fetchCourses();
-  int _value = 1;
+  int _value = 0;
 
   //dialog
   dynamic dialog() {
@@ -31,10 +32,28 @@ class _HomeState extends State<Home> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text('Notifications'),
+          elevation: 2.0,
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text("Notification"),
+                Container(
+                  width: MediaQuery.of(context).size.width * .9,
+                  height: MediaQuery.of(context).size.height * .9,
+                  child: Column(
+                    children: [
+                      Text("Notification 1"),
+                      Text("Notification 2"),
+                      Text("Notification 3"),
+                      Text("Notification 4"),
+                      Text("Notification 5"),
+                      Text("Notification 6"),
+                      Text("Notification 7"),
+                      Text("Notification 8"),
+                      Text("Notification 9"),
+                      Text("Notification 10"),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
@@ -133,7 +152,6 @@ class _HomeState extends State<Home> {
         onPressed: () {
           dialog();
         },
-        // heroTag: dialog(),
         elevation: 0.0,
         backgroundColor: Color(0xff007bff),
         child: Icon(
@@ -161,10 +179,7 @@ class _HomeState extends State<Home> {
 
               //search bar
               Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 30.0,
-                  vertical: 20.0,
-                ),
+                padding: EdgeInsets.fromLTRB(30.0, 20.0, 10.0, 20.0),
                 child: Row(
                   children: [
                     Flexible(
@@ -178,7 +193,20 @@ class _HomeState extends State<Home> {
                       child: DropdownButtonHideUnderline(
                         child: DropdownButton(
                             value: _value,
+                            iconEnabledColor: Color(0xff007bff),
                             items: [
+                              DropdownMenuItem(
+                                child: CircleAvatar(
+                                  radius: 22.0,
+                                  backgroundColor: Colors.transparent,
+                                  child: Icon(
+                                    Icons.language_rounded,
+                                    size: 44.0,
+                                    color: Color(0xff007bff),
+                                  ),
+                                ),
+                                value: 0,
+                              ),
                               DropdownMenuItem(
                                 child: CircleAvatar(
                                   radius: 22.0,
@@ -266,142 +294,150 @@ class _HomeState extends State<Home> {
                 children: [
                   Column(
                     children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            SlideBottomRoute(
-                              page: GradePage(
-                                name: '9',
-                                image: 'assets/9th.jpg',
+                      OpenContainer(
+                          transitionDuration: Duration(milliseconds: 600),
+                          closedColor: Colors.transparent,
+                          closedElevation: 0.0,
+                          closedBuilder: (context, openWidget) {
+                            return GestureDetector(
+                              onTap: openWidget,
+                              child: Container(
+                                width: MediaQuery.of(context).size.width * .1,
+                                height: MediaQuery.of(context).size.width * .1,
+                                decoration: BoxDecoration(
+                                  color: Colors.blue,
+                                  borderRadius: BorderRadius.circular(50.0),
+                                ),
+                                child: Center(
+                                  child: AutoSizeText(
+                                    "9th",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
                               ),
-                            ),
-                          );
-                        },
-                        child: Container(
-                          width: MediaQuery.of(context).size.width * .1,
-                          height: MediaQuery.of(context).size.width * .1,
-                          decoration: BoxDecoration(
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.circular(50.0),
-                          ),
-                          child: Center(
-                            child: AutoSizeText(
-                              "9th",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
+                            );
+                          },
+                          openBuilder: (context, closeWidget) {
+                            return GradePage(
+                              name: '9',
+                              image: 'assets/9th.jpg',
+                            );
+                          }),
                     ],
                   ),
                   Column(
                     children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            SlideBottomRoute(
-                              page: GradePage(
-                                name: '10',
-                                image: 'assets/10th.jpg',
+                      OpenContainer(
+                          transitionDuration: Duration(milliseconds: 600),
+                          closedColor: Colors.transparent,
+                          closedElevation: 0.0,
+                          closedBuilder: (context, openWidget) {
+                            return GestureDetector(
+                              onTap: openWidget,
+                              child: Container(
+                                width: MediaQuery.of(context).size.width * .1,
+                                height: MediaQuery.of(context).size.width * .1,
+                                decoration: BoxDecoration(
+                                  color: Colors.blue,
+                                  borderRadius: BorderRadius.circular(50.0),
+                                ),
+                                child: Center(
+                                  child: AutoSizeText(
+                                    "10th",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
                               ),
-                            ),
-                          );
-                        },
-                        child: Container(
-                          width: MediaQuery.of(context).size.width * .1,
-                          height: MediaQuery.of(context).size.width * .1,
-                          decoration: BoxDecoration(
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.circular(50.0),
-                          ),
-                          child: Center(
-                            child: AutoSizeText(
-                              "10th",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
+                            );
+                          },
+                          openBuilder: (context, closeWidget) {
+                            return GradePage(
+                              name: '10',
+                              image: 'assets/10th.jpg',
+                            );
+                          }),
                     ],
                   ),
                   Column(
                     children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            SlideBottomRoute(
-                              page: GradePage(
-                                name: '11',
-                                image: 'assets/11th.jpg',
+                      OpenContainer(
+                          transitionDuration: Duration(milliseconds: 600),
+                          closedColor: Colors.transparent,
+                          closedElevation: 0.0,
+                          closedBuilder: (context, openWidget) {
+                            return GestureDetector(
+                              onTap: openWidget,
+                              child: Container(
+                                width: MediaQuery.of(context).size.width * .1,
+                                height: MediaQuery.of(context).size.width * .1,
+                                decoration: BoxDecoration(
+                                  color: Colors.blue,
+                                  borderRadius: BorderRadius.circular(50.0),
+                                ),
+                                child: Center(
+                                  child: AutoSizeText(
+                                    "11th",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
                               ),
-                            ),
-                          );
-                        },
-                        child: Container(
-                          width: MediaQuery.of(context).size.width * .1,
-                          height: MediaQuery.of(context).size.width * .1,
-                          decoration: BoxDecoration(
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.circular(50.0),
-                          ),
-                          child: Center(
-                            child: AutoSizeText(
-                              "11th",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
+                            );
+                          },
+                          openBuilder: (context, closeWidget) {
+                            return GradePage(
+                              name: '11',
+                              image: 'assets/11th.jpg',
+                            );
+                          }),
                     ],
                   ),
                   Column(
                     children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            SlideBottomRoute(
-                              page: GradePage(
-                                name: '12',
-                                image: 'assets/12th.jpg',
+                      OpenContainer(
+                          transitionDuration: Duration(milliseconds: 600),
+                          closedColor: Colors.transparent,
+                          closedElevation: 0.0,
+                          closedBuilder: (context, openWidget) {
+                            return GestureDetector(
+                              onTap: openWidget,
+                              child: Container(
+                                width: MediaQuery.of(context).size.width * .1,
+                                height: MediaQuery.of(context).size.width * .1,
+                                decoration: BoxDecoration(
+                                  color: Colors.blue,
+                                  borderRadius: BorderRadius.circular(50.0),
+                                ),
+                                child: Center(
+                                  child: AutoSizeText(
+                                    "12th",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
                               ),
-                            ),
-                          );
-                        },
-                        child: Container(
-                          width: MediaQuery.of(context).size.width * .1,
-                          height: MediaQuery.of(context).size.width * .1,
-                          decoration: BoxDecoration(
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.circular(50.0),
-                          ),
-                          child: Center(
-                            child: AutoSizeText(
-                              "12th",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
+                            );
+                          },
+                          openBuilder: (context, closeWidget) {
+                            return GradePage(
+                              name: '12',
+                              image: 'assets/12th.jpg',
+                            );
+                          }),
                     ],
                   ),
                 ],
@@ -420,21 +456,25 @@ class _HomeState extends State<Home> {
                         fontSize: 24.0,
                       ),
                     ),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          SlideBottomRoute(page: AllCourses()),
-                        );
-                      },
-                      child: Text(
-                        "See All",
-                        style: TextStyle(
-                          color: Color(0xff007bff),
-                          fontSize: 16.0,
-                        ),
-                      ),
-                    ),
+                    OpenContainer(
+                        transitionDuration: Duration(milliseconds: 600),
+                        closedColor: Colors.transparent,
+                        closedElevation: 0.0,
+                        closedBuilder: (context, openWidget) {
+                          return TextButton(
+                            onPressed: openWidget,
+                            child: Text(
+                              "See All",
+                              style: TextStyle(
+                                color: Color(0xff007bff),
+                                fontSize: 16.0,
+                              ),
+                            ),
+                          );
+                        },
+                        openBuilder: (context, closeWidget) {
+                          return AllCourses();
+                        }),
                   ],
                 ),
               ),
