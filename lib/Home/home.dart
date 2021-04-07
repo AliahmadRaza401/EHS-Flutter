@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:ehs/Api/apidata.dart';
 import 'package:ehs/Course/allcourses.dart';
+import 'package:ehs/Grades/gradepage.dart';
 import 'package:ehs/Home/category.dart';
 import 'package:ehs/Home/homeslider.dart';
 import 'package:ehs/Home/topcourse.dart';
@@ -20,6 +21,41 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   // ignore: top_level_instance_method
   final data = ApiData().fetchCourses();
+  int _value = 1;
+
+  //dialog
+  dynamic dialog() {
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Notifications'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text("Notification"),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text(
+                'Got It!',
+                style: TextStyle(
+                  color: Color(0xff007bff),
+                  fontSize: 18,
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   //searchBar widget
   Widget searchBar() {
@@ -93,6 +129,19 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xfff2f2f2),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          dialog();
+        },
+        // heroTag: dialog(),
+        elevation: 0.0,
+        backgroundColor: Color(0xff007bff),
+        child: Icon(
+          Icons.notifications_on_rounded,
+          size: 34.0,
+          color: Color(0xfff2f2f2),
+        ),
+      ),
       body: SingleChildScrollView(
         child: Container(
           decoration: BoxDecoration(
@@ -116,12 +165,67 @@ class _HomeState extends State<Home> {
                   horizontal: 30.0,
                   vertical: 20.0,
                 ),
-                child: searchBar(),
+                child: Row(
+                  children: [
+                    Flexible(
+                      child: searchBar(),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(left: 10.0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50.0),
+                      ),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton(
+                            value: _value,
+                            items: [
+                              DropdownMenuItem(
+                                child: CircleAvatar(
+                                  radius: 22.0,
+                                  backgroundImage:
+                                      AssetImage('assets/english.png'),
+                                ),
+                                value: 1,
+                              ),
+                              DropdownMenuItem(
+                                child: CircleAvatar(
+                                  radius: 22.0,
+                                  backgroundImage:
+                                      AssetImage('assets/urdu.png'),
+                                ),
+                                value: 2,
+                              ),
+                              DropdownMenuItem(
+                                child: CircleAvatar(
+                                  radius: 22.0,
+                                  backgroundImage:
+                                      AssetImage('assets/french.png'),
+                                ),
+                                value: 3,
+                              ),
+                              DropdownMenuItem(
+                                child: CircleAvatar(
+                                  radius: 22.0,
+                                  backgroundImage:
+                                      AssetImage('assets/chinese.png'),
+                                ),
+                                value: 4,
+                              ),
+                            ],
+                            onChanged: (value) {
+                              setState(() {
+                                _value = value;
+                              });
+                            }),
+                      ),
+                    ),
+                  ],
+                ),
               ),
 
               //category heading
               Padding(
-                padding: EdgeInsets.fromLTRB(20.0, 30.0, 20.0, 6.0),
+                padding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 6.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -138,6 +242,170 @@ class _HomeState extends State<Home> {
 
               //category list
               CourseCategory(),
+
+              //grade heading
+              Padding(
+                padding: EdgeInsets.fromLTRB(20.0, 30.0, 20.0, 14.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Grades",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24.0,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              //grades box
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Column(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            SlideBottomRoute(
+                              page: GradePage(
+                                name: '9',
+                                image: 'assets/9th.jpg',
+                              ),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * .1,
+                          height: MediaQuery.of(context).size.width * .1,
+                          decoration: BoxDecoration(
+                            color: Colors.blue,
+                            borderRadius: BorderRadius.circular(50.0),
+                          ),
+                          child: Center(
+                            child: AutoSizeText(
+                              "9th",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            SlideBottomRoute(
+                              page: GradePage(
+                                name: '10',
+                                image: 'assets/10th.jpg',
+                              ),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * .1,
+                          height: MediaQuery.of(context).size.width * .1,
+                          decoration: BoxDecoration(
+                            color: Colors.blue,
+                            borderRadius: BorderRadius.circular(50.0),
+                          ),
+                          child: Center(
+                            child: AutoSizeText(
+                              "10th",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            SlideBottomRoute(
+                              page: GradePage(
+                                name: '11',
+                                image: 'assets/11th.jpg',
+                              ),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * .1,
+                          height: MediaQuery.of(context).size.width * .1,
+                          decoration: BoxDecoration(
+                            color: Colors.blue,
+                            borderRadius: BorderRadius.circular(50.0),
+                          ),
+                          child: Center(
+                            child: AutoSizeText(
+                              "11th",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            SlideBottomRoute(
+                              page: GradePage(
+                                name: '12',
+                                image: 'assets/12th.jpg',
+                              ),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * .1,
+                          height: MediaQuery.of(context).size.width * .1,
+                          decoration: BoxDecoration(
+                            color: Colors.blue,
+                            borderRadius: BorderRadius.circular(50.0),
+                          ),
+                          child: Center(
+                            child: AutoSizeText(
+                              "12th",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
 
               //Top courses heading
               Padding(
