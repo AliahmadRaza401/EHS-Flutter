@@ -2,6 +2,7 @@ import 'package:animations/animations.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:ehs/Api/apidata.dart';
 import 'package:ehs/Course/course.dart';
+import 'package:ehs/Localization/language_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:progress_indicators/progress_indicators.dart';
@@ -70,7 +71,7 @@ class _AllCoursesState extends State<AllCourses> {
           height: appBarHeight(),
           child: AppBar(
             title: AutoSizeText(
-              'All Courses',
+              getTranslated(context, 'All_Courses'),
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 22.0,
@@ -121,7 +122,17 @@ class _AllCoursesState extends State<AllCourses> {
                     ),
                   ),
                   title: Text(cardTitle),
-                  subtitle: Text('Credit Hour : $cardSubTitle'),
+                  subtitle: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        getTranslated(context, "Credit_Hour"),
+                      ),
+                      Text(
+                        ' : $cardSubTitle',
+                      ),
+                    ],
+                  ),
                   trailing: Icon(
                     Icons.navigate_next_rounded,
                     color: Color(0xff3385e3),
@@ -182,7 +193,7 @@ class _AllCoursesState extends State<AllCourses> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "No Internet Connection!",
+                          getTranslated(context, "No_Internet_Connection!"),
                           style: TextStyle(
                             fontSize: 20.0,
                           ),

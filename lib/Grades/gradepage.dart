@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:ehs/Api/apidata.dart';
 import 'package:ehs/Course/course.dart';
+import 'package:ehs/Localization/language_constants.dart';
 import 'package:ehs/animations/scaleanimation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,9 +9,9 @@ import 'package:progress_indicators/progress_indicators.dart';
 
 // ignore: must_be_immutable
 class GradePage extends StatefulWidget {
-  String name, image;
+  String name, title, image;
 
-  GradePage({this.name, this.image});
+  GradePage({this.name, this.title, this.image});
 
   @override
   _GradePageState createState() => _GradePageState();
@@ -75,7 +76,7 @@ class _GradePageState extends State<GradePage> {
           height: appBarHeight(),
           child: AppBar(
             title: AutoSizeText(
-              '${widget.name}th',
+              '${widget.title}',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 22.0,
@@ -131,7 +132,17 @@ class _GradePageState extends State<GradePage> {
               ),
             ),
             title: Text(cardTitle),
-            subtitle: Text('Credit Hour : $cardSubTitle'),
+            subtitle: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  getTranslated(context, "Credit_Hour"),
+                ),
+                Text(
+                  ' : $cardSubTitle',
+                ),
+              ],
+            ),
             trailing: Icon(
               Icons.navigate_next_rounded,
               color: Color(0xff3385e3),
@@ -195,7 +206,7 @@ class _GradePageState extends State<GradePage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "No Internet Connection!",
+                              getTranslated(context, "No_Internet_Connection!"),
                               style: TextStyle(
                                 fontSize: 20.0,
                               ),

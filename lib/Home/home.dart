@@ -6,15 +6,21 @@ import 'package:ehs/Grades/gradepage.dart';
 import 'package:ehs/Home/category.dart';
 import 'package:ehs/Home/homeslider.dart';
 import 'package:ehs/Home/topcourse.dart';
+import 'package:ehs/Localization/language.dart';
+import 'package:ehs/Localization/language_constants.dart';
 import 'package:ehs/animations/slideanimation.dart';
 import 'package:ehs/search/search.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 
+import '../main.dart';
+
 final searchQuery = TextEditingController();
 
 class Home extends StatefulWidget {
+  Home({Key key}) : super(key: key);
+
   @override
   _HomeState createState() => _HomeState();
 }
@@ -22,7 +28,11 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   // ignore: top_level_instance_method
   final data = ApiData().fetchCourses();
-  int _value = 0;
+
+  void _changeLanguage(Language language) async {
+    Locale _locale = await setLocale(language.languageCode);
+    MyApp.setLocale(context, _locale);
+  }
 
   //dialog
   dynamic dialog() {
@@ -31,7 +41,9 @@ class _HomeState extends State<Home> {
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Notifications'),
+          title: Text(
+            getTranslated(context, 'Notifications'),
+          ),
           elevation: 2.0,
           content: SingleChildScrollView(
             child: ListBody(
@@ -60,7 +72,7 @@ class _HomeState extends State<Home> {
           actions: <Widget>[
             TextButton(
               child: Text(
-                'Got It!',
+                getTranslated(context, 'Got_It'),
                 style: TextStyle(
                   color: Color(0xff007bff),
                   fontSize: 18,
@@ -120,11 +132,9 @@ class _HomeState extends State<Home> {
         ),
         suffixIcon: Container(
           decoration: BoxDecoration(
-              color: Color(0xff007bff),
-              borderRadius: BorderRadius.only(
-                bottomRight: Radius.circular(12),
-                topRight: Radius.circular(12),
-              )),
+            color: Color(0xff007bff),
+            borderRadius: BorderRadius.circular(12.0),
+          ),
           child: IconButton(
             onPressed: () {
               Navigator.push(
@@ -186,65 +196,27 @@ class _HomeState extends State<Home> {
                       child: searchBar(),
                     ),
                     Container(
-                      margin: EdgeInsets.only(left: 10.0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50.0),
-                      ),
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton(
-                            value: _value,
-                            iconEnabledColor: Color(0xff007bff),
-                            items: [
-                              DropdownMenuItem(
+                      child: DropdownButton<Language>(
+                        underline: SizedBox(),
+                        icon: Icon(
+                          Icons.language_rounded,
+                          size: 44.0,
+                          color: Color(0xff007bff),
+                        ),
+                        onChanged: (Language language) {
+                          _changeLanguage(language);
+                        },
+                        items: Language.languageList()
+                            .map<DropdownMenuItem<Language>>(
+                              (e) => DropdownMenuItem<Language>(
+                                value: e,
                                 child: CircleAvatar(
                                   radius: 22.0,
-                                  backgroundColor: Colors.transparent,
-                                  child: Icon(
-                                    Icons.language_rounded,
-                                    size: 44.0,
-                                    color: Color(0xff007bff),
-                                  ),
+                                  backgroundImage: AssetImage(e.flag),
                                 ),
-                                value: 0,
                               ),
-                              DropdownMenuItem(
-                                child: CircleAvatar(
-                                  radius: 22.0,
-                                  backgroundImage:
-                                      AssetImage('assets/english.png'),
-                                ),
-                                value: 1,
-                              ),
-                              DropdownMenuItem(
-                                child: CircleAvatar(
-                                  radius: 22.0,
-                                  backgroundImage:
-                                      AssetImage('assets/urdu.png'),
-                                ),
-                                value: 2,
-                              ),
-                              DropdownMenuItem(
-                                child: CircleAvatar(
-                                  radius: 22.0,
-                                  backgroundImage:
-                                      AssetImage('assets/french.png'),
-                                ),
-                                value: 3,
-                              ),
-                              DropdownMenuItem(
-                                child: CircleAvatar(
-                                  radius: 22.0,
-                                  backgroundImage:
-                                      AssetImage('assets/chinese.png'),
-                                ),
-                                value: 4,
-                              ),
-                            ],
-                            onChanged: (value) {
-                              setState(() {
-                                _value = value;
-                              });
-                            }),
+                            )
+                            .toList(),
                       ),
                     ),
                   ],
@@ -258,7 +230,8 @@ class _HomeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      "Categories",
+                      getTranslated(context, 'Category_heading'),
+                      // "Categories",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 24.0,
@@ -278,7 +251,7 @@ class _HomeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      "Grades",
+                      getTranslated(context, 'Grades'),
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 24.0,
@@ -302,20 +275,22 @@ class _HomeState extends State<Home> {
                             return GestureDetector(
                               onTap: openWidget,
                               child: Container(
-                                width: MediaQuery.of(context).size.width * .1,
-                                height: MediaQuery.of(context).size.width * .1,
+                                width: 50.0,
+                                height: 50.0,
+                                padding: EdgeInsets.all(2.0),
                                 decoration: BoxDecoration(
                                   color: Colors.blue,
                                   borderRadius: BorderRadius.circular(50.0),
                                 ),
                                 child: Center(
                                   child: AutoSizeText(
-                                    "9th",
+                                    getTranslated(context, '9th'),
                                     style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 18,
+                                      fontSize: 16,
                                       fontWeight: FontWeight.bold,
                                     ),
+                                    maxLines: 1,
                                   ),
                                 ),
                               ),
@@ -324,6 +299,7 @@ class _HomeState extends State<Home> {
                           openBuilder: (context, closeWidget) {
                             return GradePage(
                               name: '9',
+                              title: getTranslated(context, '9th'),
                               image: 'assets/9th.jpg',
                             );
                           }),
@@ -339,20 +315,22 @@ class _HomeState extends State<Home> {
                             return GestureDetector(
                               onTap: openWidget,
                               child: Container(
-                                width: MediaQuery.of(context).size.width * .1,
-                                height: MediaQuery.of(context).size.width * .1,
+                                width: 50.0,
+                                height: 50.0,
+                                padding: EdgeInsets.all(2.0),
                                 decoration: BoxDecoration(
                                   color: Colors.blue,
                                   borderRadius: BorderRadius.circular(50.0),
                                 ),
                                 child: Center(
                                   child: AutoSizeText(
-                                    "10th",
+                                    getTranslated(context, '10th'),
                                     style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 18,
+                                      fontSize: 16,
                                       fontWeight: FontWeight.bold,
                                     ),
+                                    maxLines: 1,
                                   ),
                                 ),
                               ),
@@ -361,6 +339,7 @@ class _HomeState extends State<Home> {
                           openBuilder: (context, closeWidget) {
                             return GradePage(
                               name: '10',
+                              title: getTranslated(context, '10th'),
                               image: 'assets/10th.jpg',
                             );
                           }),
@@ -376,20 +355,22 @@ class _HomeState extends State<Home> {
                             return GestureDetector(
                               onTap: openWidget,
                               child: Container(
-                                width: MediaQuery.of(context).size.width * .1,
-                                height: MediaQuery.of(context).size.width * .1,
+                                width: 50.0,
+                                height: 50.0,
+                                padding: EdgeInsets.all(2.0),
                                 decoration: BoxDecoration(
                                   color: Colors.blue,
                                   borderRadius: BorderRadius.circular(50.0),
                                 ),
                                 child: Center(
                                   child: AutoSizeText(
-                                    "11th",
+                                    getTranslated(context, '11th'),
                                     style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 18,
+                                      fontSize: 16,
                                       fontWeight: FontWeight.bold,
                                     ),
+                                    maxLines: 1,
                                   ),
                                 ),
                               ),
@@ -398,6 +379,7 @@ class _HomeState extends State<Home> {
                           openBuilder: (context, closeWidget) {
                             return GradePage(
                               name: '11',
+                              title: getTranslated(context, '11th'),
                               image: 'assets/11th.jpg',
                             );
                           }),
@@ -413,20 +395,22 @@ class _HomeState extends State<Home> {
                             return GestureDetector(
                               onTap: openWidget,
                               child: Container(
-                                width: MediaQuery.of(context).size.width * .1,
-                                height: MediaQuery.of(context).size.width * .1,
+                                width: 50.0,
+                                height: 50.0,
+                                padding: EdgeInsets.all(2.0),
                                 decoration: BoxDecoration(
                                   color: Colors.blue,
                                   borderRadius: BorderRadius.circular(50.0),
                                 ),
                                 child: Center(
                                   child: AutoSizeText(
-                                    "12th",
+                                    getTranslated(context, '12th'),
                                     style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 18,
+                                      fontSize: 16,
                                       fontWeight: FontWeight.bold,
                                     ),
+                                    maxLines: 1,
                                   ),
                                 ),
                               ),
@@ -435,6 +419,7 @@ class _HomeState extends State<Home> {
                           openBuilder: (context, closeWidget) {
                             return GradePage(
                               name: '12',
+                              title: getTranslated(context, '12th'),
                               image: 'assets/12th.jpg',
                             );
                           }),
@@ -450,7 +435,7 @@ class _HomeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     AutoSizeText(
-                      "Top Courses",
+                      getTranslated(context, 'Top_Courses'),
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 24.0,
@@ -464,7 +449,7 @@ class _HomeState extends State<Home> {
                           return TextButton(
                             onPressed: openWidget,
                             child: Text(
-                              "See All",
+                              getTranslated(context, 'See_All'),
                               style: TextStyle(
                                 color: Color(0xff007bff),
                                 fontSize: 16.0,
@@ -592,7 +577,8 @@ class _HomeState extends State<Home> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                "No Internet Connection!",
+                                getTranslated(
+                                    context, "No_Internet_Connection!"),
                                 style: TextStyle(
                                   fontSize: 20.0,
                                 ),

@@ -1,5 +1,6 @@
 import 'package:ehs/Api/apidata.dart';
 import 'package:ehs/Course/course.dart';
+import 'package:ehs/Localization/language_constants.dart';
 import 'package:ehs/animations/scaleanimation.dart';
 import 'package:flutter/material.dart';
 import 'package:progress_indicators/progress_indicators.dart';
@@ -9,6 +10,7 @@ class SearchPage extends StatefulWidget {
   String queryResults;
 
   SearchPage({this.queryResults});
+
   @override
   _SearchPageState createState() => _SearchPageState();
 }
@@ -119,7 +121,17 @@ class _SearchPageState extends State<SearchPage> {
               ),
             ),
             title: Text(cardTitle),
-            subtitle: Text('Credit Hour : $cardSubTitle'),
+            subtitle: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  getTranslated(context, "Credit_Hour"),
+                ),
+                Text(
+                  ' : $cardSubTitle',
+                ),
+              ],
+            ),
             trailing: Icon(
               Icons.navigate_next_rounded,
               color: Color(0xff3385e3),
@@ -153,15 +165,16 @@ class _SearchPageState extends State<SearchPage> {
                             return SizedBox(
                               height: 0.0,
                             );
-                          }
-                          else if (snapshot.data[i]['course_name'].toString().toLowerCase().contains(widget.queryResults.toLowerCase())) {
+                          } else if (snapshot.data[i]['course_name']
+                              .toString()
+                              .toLowerCase()
+                              .contains(widget.queryResults.toLowerCase())) {
                             return allCourseCard(
                               snapshot.data[i]['course_name'],
                               snapshot.data[i]['course_credit_value'],
                               snapshot.data[i]['course_image'],
                             );
-                          }
-                          else{
+                          } else {
                             return SizedBox(
                               height: 0.0,
                             );
@@ -189,7 +202,7 @@ class _SearchPageState extends State<SearchPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "No Internet Connection!",
+                              getTranslated(context, "No_Internet_Connection!"),
                               style: TextStyle(
                                 fontSize: 20.0,
                               ),

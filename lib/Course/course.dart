@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:ehs/Api/apidata.dart';
+import 'package:ehs/Localization/language_constants.dart';
 import 'package:ehs/Video/video_player.dart';
 import 'package:ehs/animations/scaleanimation.dart';
 import 'package:ehs/webview/webView.dart';
@@ -146,7 +147,7 @@ class _CoursePageState extends State<CoursePage> {
                 child: Row(
                   children: [
                     Text(
-                      "Details",
+                      getTranslated(context, "Details"),
                       style: TextStyle(
                         fontSize: 20.0,
                       ),
@@ -169,7 +170,7 @@ class _CoursePageState extends State<CoursePage> {
                       child: Row(
                         children: [
                           AutoSizeText(
-                            'Grade : ',
+                            getTranslated(context, 'Grade'),
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -189,7 +190,7 @@ class _CoursePageState extends State<CoursePage> {
                       child: Row(
                         children: [
                           AutoSizeText(
-                            'Prerequisites : ',
+                            getTranslated(context, 'Prerequisites'),
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -209,7 +210,7 @@ class _CoursePageState extends State<CoursePage> {
                       child: Row(
                         children: [
                           AutoSizeText(
-                            'Type : ',
+                            getTranslated(context, 'Type'),
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -229,7 +230,7 @@ class _CoursePageState extends State<CoursePage> {
                       child: Row(
                         children: [
                           AutoSizeText(
-                            'Credit Value : ',
+                            getTranslated(context, 'Credit_Value'),
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -249,7 +250,7 @@ class _CoursePageState extends State<CoursePage> {
                       child: Row(
                         children: [
                           AutoSizeText(
-                            'Developer : ',
+                            getTranslated(context, 'Developer'),
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -269,7 +270,7 @@ class _CoursePageState extends State<CoursePage> {
                       child: Row(
                         children: [
                           AutoSizeText(
-                            'Develop Date : ',
+                            getTranslated(context, 'Develop_Date'),
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -289,7 +290,7 @@ class _CoursePageState extends State<CoursePage> {
                       child: Row(
                         children: [
                           AutoSizeText(
-                            'Department : ',
+                            getTranslated(context, 'Department'),
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -309,14 +310,16 @@ class _CoursePageState extends State<CoursePage> {
                       child: Row(
                         children: [
                           AutoSizeText(
-                            'Status : ',
+                            getTranslated(context, 'Status'),
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           AutoSizeText(
-                            courseStatus == '1' ? 'Active' : 'Not Active',
+                            courseStatus == '1'
+                                ? getTranslated(context, 'Active')
+                                : getTranslated(context, 'Not_Active'),
                             style: TextStyle(
                               fontSize: 16,
                             ),
@@ -332,7 +335,7 @@ class _CoursePageState extends State<CoursePage> {
                 child: Row(
                   children: [
                     Text(
-                      "Description",
+                      getTranslated(context, "Description"),
                       style: TextStyle(
                         fontSize: 20.0,
                       ),
@@ -385,7 +388,7 @@ class _CoursePageState extends State<CoursePage> {
                         Icons.how_to_reg_rounded,
                       ),
                       label: Text(
-                        "Register",
+                        getTranslated(context, "Register"),
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 16.0,
@@ -419,7 +422,7 @@ class _CoursePageState extends State<CoursePage> {
                         size: 30.0,
                       ),
                       label: Text(
-                        "Preview",
+                        getTranslated(context, "Preview"),
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 16.0,
@@ -493,7 +496,7 @@ class _CoursePageState extends State<CoursePage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "No Internet Connection!",
+                        getTranslated(context, "No_Internet_Connection!"),
                         style: TextStyle(
                           fontSize: 20.0,
                         ),

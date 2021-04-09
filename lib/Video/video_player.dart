@@ -25,7 +25,6 @@ class _VideoPlayerState extends State<VideoPlayer> {
   @override
   void initState() {
     super.initState();
-    // Wrapper on top of the videoPlayerController
 
     _chewieController = ChewieController(
       videoPlayerController: VideoPlayerController.network(
@@ -49,7 +48,6 @@ class _VideoPlayerState extends State<VideoPlayer> {
   void dispose() {
     _chewieController.pause();
     super.dispose();
-    print("dispose");
   }
 
   @override

@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:ehs/Localization/language_constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -55,7 +56,7 @@ class _SupportState extends State<Support> {
                 size: 44.0,
               ),
               title: Text(
-                "Contact Live Chat",
+                getTranslated(context, 'Contact_Live_Chat'),
                 style: TextStyle(
                   color: Color(0xff007bff),
                   fontWeight: FontWeight.bold,
@@ -79,7 +80,7 @@ class _SupportState extends State<Support> {
       backgroundColor: Color(0xfff2f2f2),
       appBar: AppBar(
         title: AutoSizeText(
-          'Reach Our Support Team',
+          getTranslated(context, 'Reach_Our_Support_Team'),
           style: TextStyle(
             color: Colors.black,
             fontSize: 22.0,
@@ -99,7 +100,7 @@ class _SupportState extends State<Support> {
                 top: 20.0,
               ),
               child: Text(
-                "How Can We Help You?",
+                getTranslated(context, 'How_Can_We_Help_You'),
                 style: TextStyle(
                   color: Color(0xff007bff),
                   fontSize: 22.0,
@@ -115,12 +116,7 @@ class _SupportState extends State<Support> {
                   width: 54.0,
                   height: 54.0,
                   decoration: BoxDecoration(
-                    // color: Color(0xff007bff),
                     borderRadius: BorderRadius.circular(50.0),
-                    // border: Border.all(
-                    //   color: Color(0xff007bff),
-                    //   width: 2.0,
-                    // ),
                   ),
                   child: Icon(
                     Icons.email_outlined,
@@ -135,7 +131,9 @@ class _SupportState extends State<Support> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Send us an email:"),
+                  Text(
+                    getTranslated(context, 'Send_us_an_email'),
+                  ),
                 ],
               ),
             ),

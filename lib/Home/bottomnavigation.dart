@@ -1,4 +1,5 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:ehs/Localization/language_constants.dart';
 import 'package:ehs/Support%20Pages/support.dart';
 import 'package:flutter/material.dart';
 
@@ -59,7 +60,9 @@ class _BottomNavState extends State<BottomNav> {
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Text("Tabbar Index Error"),
+            Text(
+              getTranslated(context, 'Tabbar_Index_Error'),
+            ),
           ],
         );
     }

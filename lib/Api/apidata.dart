@@ -10,7 +10,6 @@ class ApiData {
     if (response.statusCode == 200) {
       var jsonResponse = convert.jsonDecode(response.body);
       return jsonResponse['data'];
-      // print(apiData);
     }
   }
 }
