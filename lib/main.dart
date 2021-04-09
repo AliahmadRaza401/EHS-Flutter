@@ -46,7 +46,7 @@ class _MyAppState extends State<MyApp> {
       return Container(
         child: Center(
           child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.blue[800])),
+              valueColor: AlwaysStoppedAnimation<Color>(Color(0xff007bff))),
         ),
       );
     } else {

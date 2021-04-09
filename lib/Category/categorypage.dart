@@ -140,7 +140,7 @@ class _CategoryPageState extends State<CategoryPage> {
                   ),
                   trailing: Icon(
                     Icons.navigate_next_rounded,
-                    color: Color(0xff3385e3),
+                    color: Color(0xff007bff),
                     size: 44.0,
                   ),
                 ),
