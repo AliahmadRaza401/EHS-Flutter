@@ -48,5 +48,12 @@
   "9th": "第九名",
   "10th": "第十名",
   "11th": "11日",
-  "12th": "第十二"
+  "12th": "第十二",
+  "searchHint": "搜索您的課程..",
+  "searchError": "輸入搜索查詢",
+  "commentHint": "寫出你的想法..",
+  "commentError": "寫出你的想法",
+  "Comment": "發表評論",
+  "Post": "郵政",
+  "Comments": "註釋"
 }

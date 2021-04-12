@@ -48,5 +48,12 @@
   "9th": "9ème",
   "10th": "10e",
   "11th": "11ème",
-  "12th": "12ème"
+  "12th": "12ème",
+  "searchHint": "Recherchez votre cours..",
+  "searchError": "Entrez la requête de recherche",
+  "commentHint": "Écrivez vos pensées..",
+  "commentError": "Écrivez vos pensées",
+  "Comment": "Poste un commentaire",
+  "Post": "Poster",
+  "Comments": "Commentaires"
 }

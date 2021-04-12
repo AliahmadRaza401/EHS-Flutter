@@ -7,6 +7,9 @@ import 'package:ehs/webview/webView.dart';
 import 'package:flutter/material.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 
+final commentText = TextEditingController();
+final _formKey = GlobalKey<FormState>();
+
 // ignore: must_be_immutable
 class CoursePage extends StatefulWidget {
   String courseName, courseImage;
@@ -55,6 +58,52 @@ class _CoursePageState extends State<CoursePage> {
     } else {
       return MediaQuery.of(context).size.height * .17;
     }
+  }
+
+  //comment section widget
+  Widget commentBar() {
+    return TextFormField(
+      initialValue: null,
+      autocorrect: true,
+      controller: commentText,
+      validator: (comment) {
+        if (comment.isEmpty) {
+          return getTranslated(context, 'commentError');
+        } else {
+          return null;
+        }
+      },
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      keyboardAppearance: Brightness.dark,
+      keyboardType: TextInputType.text,
+      style: TextStyle(
+        color: Colors.black,
+        fontSize: 20.0,
+        decoration: TextDecoration.none,
+      ),
+      textInputAction: TextInputAction.next,
+      cursorColor: Colors.black,
+      cursorWidth: 2.0,
+      cursorHeight: 26.0,
+      decoration: InputDecoration(
+        contentPadding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 10.0),
+        errorStyle: TextStyle(
+          fontSize: 15.0,
+        ),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: Color(0xff007bff), width: 2.0),
+        ),
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: Color(0xff8cbaf2), width: 2.0),
+        ),
+        border: InputBorder.none,
+        hintText: getTranslated(context, 'commentHint'),
+        hintStyle: TextStyle(
+          color: Color(0xff007bff),
+          fontSize: 16.0,
+        ),
+      ),
+    );
   }
 
   //category image
@@ -196,10 +245,12 @@ class _CoursePageState extends State<CoursePage> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          AutoSizeText(
-                            '$coursePreReq',
-                            style: TextStyle(
-                              fontSize: 16,
+                          Flexible(
+                            child: AutoSizeText(
+                              '$coursePreReq',
+                              style: TextStyle(
+                                fontSize: 16,
+                              ),
                             ),
                           ),
                         ],
@@ -330,6 +381,8 @@ class _CoursePageState extends State<CoursePage> {
                   ],
                 ),
               ),
+
+              //Description section
               Padding(
                 padding: EdgeInsets.only(top: 30.0),
                 child: Row(
@@ -358,6 +411,8 @@ class _CoursePageState extends State<CoursePage> {
                   ),
                 ),
               ),
+
+              //buttons section
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 20.0),
                 child: Row(
@@ -431,6 +486,99 @@ class _CoursePageState extends State<CoursePage> {
                     ),
                   ],
                 ),
+              ),
+
+              //post comment section
+              Padding(
+                padding: EdgeInsets.only(top: 30.0),
+                child: Row(
+                  children: [
+                    Text(
+                      getTranslated(context, 'Comment'),
+                      style: TextStyle(
+                        fontSize: 20.0,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                padding: EdgeInsets.all(20.0),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      commentBar(),
+                      Padding(
+                        padding: EdgeInsets.only(top: 6.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
+                                if (_formKey.currentState.validate()) {
+                                  return Text("ok");
+                                }
+                              },
+                              style: ButtonStyle(
+                                shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(6.0),
+                                )),
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                  Color(0xff007bff),
+                                ),
+                              ),
+                              child: Text(
+                                getTranslated(context, 'Post'),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+              //comments section
+              Padding(
+                padding: EdgeInsets.only(top: 30.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      getTranslated(context, 'Comments'),
+                      style: TextStyle(
+                        fontSize: 20.0,
+                      ),
+                    ),
+                    Text(
+                      " (0)",
+                      style: TextStyle(
+                        fontSize: 20.0,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                margin: EdgeInsets.only(top: 10.0, bottom: 30.0),
+                padding: EdgeInsets.all(20.0),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                child: null,
               ),
             ],
           ),
